@@ -1,0 +1,77 @@
+---
+title: 'O*Net Demands and Resources: Associations with Stress, Burnout, and Engagement'
+author:
+  - name: Dr. Alicia Stachowski
+    affil: 2
+    orcid: '0000-0002-1099-3857'
+  - name: Renata Garcia Prieto Palacios Roji
+    affil: 1
+  - name: Dr. John Kulas
+    affil: 1
+affiliation:
+  - num: 1
+    address: Montclair State University
+  - num: 2
+    address: University of Wisonsin-Stout
+column_numbers: 3
+logoright_name: https&#58;//raw.githubusercontent.com/brentthorne/posterdown/master/images/betterhexlogo.png
+logoleft_name: https&#58;//raw.githubusercontent.com/brentthorne/posterdown/master/images/betterhexlogo.png
+output: 
+  posterdown::posterdown_html:
+    self_contained: false
+bibliography: packages.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Introduction
+
+
+
+## Objectives
+
+
+
+# Methods
+
+
+
+# Results
+
+
+
+```{r mytable, out.width='80%'}
+knitr::kable(iris[1:10, 1:4], caption = 'Table caption.',align = 'c',"html")
+```
+
+ Figure \@ref(fig:standard-plot), or Figure \@ref(fig:morefigs).
+
+```{r standard-plot, out.width='80%', fig.align='center', fig.cap='Great figure!', fig.height=5}
+plot(mtcars[1:2])
+```
+
+```{r morefigs, out.width='80%', echo=TRUE, fig.cap='Amazing, right?!', fig.height=5}
+data <- iris
+
+plot(x = data$Sepal.Length, 
+     y = data$Sepal.Width, 
+     col = data$Species,
+     pch = 19, 
+     xlab = "Sepal Length (cm)",
+     ylab = "Sepal Width (cm)")
+
+```
+
+# Next Steps
+
+
+
+# Conclusion
+
+```{r, include=FALSE}
+knitr::write_bib(c('knitr','rmarkdown','posterdown','pagedown'), 'packages.bib')
+```
+
+# References
