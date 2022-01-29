@@ -4,18 +4,21 @@ author:
   - name: Renata Garcia Prieto Palacios Roji
     affil: 1
     orcid: '0000-0002-1099-3857'
-  - name: Dr. Alicia Stachowski
+  - name: Alicia Stachowski
     affil: 2
-  - name: Dr. John Kulas
+  - name: John Kulas
     affil: 1
 affiliation:
   - num: 1
     address: Montclair State University
   - num: 2
     address: University of Wisonsin-Stout
+primary_colour: "#80000d"      ## overwrites default see https://git.mehalter.com/mehalter/GTRI-Templates/src/branch/master/conference-poster/poster.rmd
+secondary_colour: "#f22c7b"
+accent_colour: "#f7eb60"
 column_numbers: 3
 logoright_name: https&#58;//raw.githubusercontent.com/brentthorne/posterdown/master/images/betterhexlogo.png
-logoleft_name: https&#58;//raw.githubusercontent.com/brentthorne/posterdown/master/images/betterhexlogo.png
+logoleft_name: https&#58;//www.montclair.edu/university-communications/wp-content/uploads/sites/144/2020/10/presidential-seal.svg
 output: 
   posterdown::posterdown_html:
     self_contained: false
@@ -25,6 +28,7 @@ bibliography: packages.bib
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
+
 
 # Introduction
 

@@ -1,0 +1,15 @@
+```{css, echo=FALSE}
+
+div.title_container{
+   background-color: darkred;
+}
+
+div.logo_left{
+  background-color: darkred;
+}
+
+div.logo_right{
+  background-color: darkred;
+}
+
+```
