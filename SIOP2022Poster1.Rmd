@@ -1,5 +1,5 @@
 ---
-title: 'O*Net Demands and Resources: Associations with Stress, Burnout, and Engagement'
+title: 'O\*Net Demands and Resources: Associations with Stress, Burnout, and Engagement'
 author:
   - name: Renata Garcia Prieto Palacios Roji
     affil: 1
