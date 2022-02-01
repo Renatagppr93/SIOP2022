@@ -13,9 +13,9 @@ affiliation:
     address: Montclair State University
   - num: 2
     address: University of Wisonsin-Stout
-primary_colour: "#80000d"      ## overwrites default see https://git.mehalter.com/mehalter/GTRI-Templates/src/branch/master/conference-poster/poster.rmd
-secondary_colour: "#f22c7b"
-accent_colour: "#f7eb60"
+primary_colour: "#640d14"      ## https://coolors.co/250902-38040e-640d14-800e13-ad2831
+secondary_colour: "#ad2831"
+accent_colour: "#38040e"
 column_numbers: 3
 logoright_name: https&#58;//raw.githubusercontent.com/brentthorne/posterdown/master/images/betterhexlogo.png
 #logoleft_name: https&#58;//www.montclair.edu/university-communications/wp-content/uploads/sites/144/2020/10/presidential-seal.svg
