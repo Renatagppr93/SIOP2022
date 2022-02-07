@@ -32,11 +32,9 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Introduction
 
-The job demands-resources model (Demerouti et al., 2001) and later job demands-resources theory (Bakker & Demerouti, 2017) have inspired a plethora of study on the process and experience of job stress and employee motivation in recent decades. In the current project, we draw attention to a basic question regarding a key assumption we make regarding this process - that of the objective nature of job characteristics as either demands or resources. 
+The job demands-resources model (Demerouti et al., 2001) and later job demands-resources theory (Bakker & Demerouti, 2017) have inspired a plethora of study on the process and experience of job stress and employee motivation. We explore a key assumption of this process - that of the objective nature of job characteristics as either demands or resources.
 
-## Objectives  
-
-The major objective of this project is to document whether job characteristics (pulled from O*NET) should be interpreted as possibly vacillating between resources and demands (in the form of challenges and hinderances). We further present descriptive information regarding which job characteristics are deemed the strongest as well as most variable resources and demands across jobs and by type of employee (knowledge or skill worker classification).
+The major objective of this project is to document whether job characteristics (from O*NET) should be interpreted as possibly vacillating between resources and demands. We further present descriptive information regarding which job characteristics are deemed the strongest as well as most variable resources and demands across jobs and by type of employee (knowledge or skill worker classification).
 
 * Hypothesis 1: Job characteristics differ in variability/stability regarding subjective worker perception as a demand or resource.
 * Hypothesis 2: Job characteristics are not uniquely categorized as a resource or demand, but rather, some job characteristics are rated highly as both a resource and a demand.
@@ -44,33 +42,467 @@ The major objective of this project is to document whether job characteristics (
 * Hypothesis 3b: Some of the variability in evaluation as challenge demands may be attributable to the type of work being done. 
 * Hypothesis 3c: Some of the variability in evaluation as hindrance demands may be attributable to the type of work being done. 
 
-# Methods
+# Methods  
 
-### Participants
+### Participants & Procedure  
 
-* 568 respondents were retained for analyses here following data screening/cleaning. 
-* Tenure:, 13.57% had been in their referent job less than 6 months, 19.20% between 6 months and a year, 49.12% between one and five years, 13.27% between 5 and 10 years, and 4.87% more than 10 years.
+* 568 respondents, 13.57% had been in their referent job less than 6 months, 19.20% between 6 months and a year, 49.12% between one and five years, 13.27% between 5 and 10 years, and 4.87% more than 10 years.
 * Ages ranged from 18 to 65 with an average of 28.18 years old (SD = 7.53).
 * Gender: female (52.58%) or male (46.83%). 
 * Job classifications: International Standard Classification of Occupations (ISCO) via the package labourR (Kouretsis et al., 2020), and further categorized into “knowledge” (n = 320) versus “skilled” (n = 214) occupations with knowledge workers being identified via ISCO classifications of: 1) professionals, and 2) managers.
 
-### Materials
-Characteristics, Demands, and Resources. 
- We used 98 statements taken directly from O*NET’s “activity” and “context” classifications. Regarding work activities, O*Net specifies 41 elements that are grouped into categories of “Information Input” (5 statements), “Interacting with Others” (17 statements), “Mental Processes” (10 statements) and “Work Output” (9 statements). The 57 “Work context” statements are grouped within dimensions of “Interpersonal Relationships” (14 statements), “Physical Work Conditions” (30 statements), and “Structural Job Characteristics” (13 statements).
-Each of the 98 descriptors has potentially unique response categories, see here for example. Although the wording is often unique, the O*Net scaling is consistently 1 (low) to 5 (high). We retained the verbatim O*NET wording to capture characteristics of relevance for each respondent. Subsequent to these self-evaluations, each respondent who agreed that the element had at least some relevance to their job was also asked to rate that element in terms of, 1) …this aspect of your job is a resource that can be functional in achieving work goals, reduce job demands, or stimulate personal growth/development, 2) …this aspect of your job is a challenge that can promote mastery, personal growth, or future gains, and 3) …this aspect of your job is a hindrance that can inhibit personal growth, learning, and work goal attainment.
-Procedure
-The data for this study were collected through Prolific, a data collection platform. An email was sent to a random subset of all eligible participants in the Prolific respondent pool, notifying them about their eligibility for the study based on their demography. The requirements to participate in this study included being 18 or older and holding either a full-time or part-time job. Participants then voluntarily chose to respond to the survey. Participants were asked to think about their primary job while answering the survey, and upon completion each participant was compensated in the amount of six US dollars.
+The data for this study were collected through Prolific sample,18 or older and holding a full-time or part-time job. Participants were asked to think about their primary job while answering the survey, and upon completion each participant was compensated in the amount of six US dollars.
 
+### Materials
+
+We used 98 statements taken directly from O*NET’s “activity” and “context” classifications. 
+Each of the 98 descriptors has potentially unique response categories, but scaling was consistently 1 (low) to 5 (high). Subsequent to these self-evaluations, respondents were asked to rate elements in terms of 1) …this aspect of your job is a resource that can be functional in achieving work goals, reduce job demands, or stimulate personal growth/development, 2) …this aspect of your job is a challenge that can promote mastery, personal growth, or future gains, and 3) …this aspect of your job is a hindrance that can inhibit personal growth, learning, and work goal attainment.
 
 # Results
 
+
+
+## top 10 demands and resources, divided by skilled versus knowledge workers
+
+```{r generalrankings}
+labels <- read.csv("truncatedlabels.csv")            
+chars <- as.data.frame(t(data[22:117]))           
+chars$description <- labels[c(22:117),1]
+chars$mean <- round(rowMeans(chars[1:nrow(data)], na.rm=TRUE),2)
+chars$sd   <- round(apply(chars[1:nrow(data)], 1, sd, na.rm=TRUE),2)
+chars <- chars[ which(chars$sd > 0), ]        
+chars <- chars[,-61]   ## attention check
+sortchars <- chars[order(-chars$mean),]
+topchars <- head(sortchars, 10)
+bottomchars <- tail(sortchars,10)
+topchars <- topchars[tail(names(topchars),3)]        
+bottomchars <- bottomchars[tail(names(bottomchars),3)]  
+library(ggplot2)
+overall.chars.t <- ggplot(topchars, aes(x=reorder(description,mean), y=mean)) + geom_bar(stat="identity", color="black", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Overall") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5)) 
+overall.chars.b <- ggplot(bottomchars, aes(x=reorder(description,-mean), y=mean)) + geom_bar(stat="identity", color="black", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Overall") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
+#### Service
+chars <- as.data.frame(t(service[22:117]))           
+chars$description <- labels[c(22:117),1]
+chars$mean <- round(rowMeans(chars[1:nrow(service)], na.rm=TRUE),2)
+chars$sd   <- round(apply(chars[1:nrow(service)], 1, sd, na.rm=TRUE),2)
+chars <- chars[ which(chars$sd > 0), ]        
+chars <- chars[,-61]   ## attention check
+sortchars <- chars[order(-chars$mean),]
+topchars <- head(sortchars, 10)
+bottomchars <- tail(sortchars,10)
+topchars <- topchars[tail(names(topchars),3)]        
+bottomchars <- bottomchars[tail(names(bottomchars),3)]  
+service.t <- ggplot(topchars, aes(x=reorder(description,mean), y=mean)) + geom_bar(stat="identity", color="black", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Skill") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
+service.b <- ggplot(bottomchars, aes(x=reorder(description,-mean), y=mean)) + geom_bar(stat="identity", color="black", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Skill") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
+## Knowledge
+chars <- as.data.frame(t(knowledge[22:117]))           
+chars$description <- labels[c(22:117),1]
+chars$mean <- round(rowMeans(chars[1:nrow(knowledge)], na.rm=TRUE),2)
+chars$sd   <- round(apply(chars[1:nrow(knowledge)], 1, sd, na.rm=TRUE),2)
+chars <- chars[ which(chars$sd > 0), ]        
+chars <- chars[,-61]   ## attention check
+sortchars <- chars[order(-chars$mean),]
+topchars <- head(sortchars, 10)
+bottomchars <- tail(sortchars,10)
+topchars <- topchars[tail(names(topchars),3)]        
+bottomchars <- bottomchars[tail(names(bottomchars),3)]  
+knowledge.t <- ggplot(topchars, aes(x=reorder(description,mean), y=mean)) + geom_bar(stat="identity", color="black", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Knowledge") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
+knowledge.b <- ggplot(bottomchars, aes(x=reorder(description,-mean), y=mean)) + geom_bar(stat="identity", color="black", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Knowledge") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
+```
+
+```{r resources}
+labels <- read.csv("truncatedlabels.csv")            
+resource <- as.data.frame(t(data[118:202]))           
+resource$description <- labels[c(118:202),1]
+resource$mean <- round(rowMeans(resource[1:nrow(data)], na.rm=TRUE),2)
+resource$sd   <- round(apply(resource[1:nrow(data)], 1, sd, na.rm=TRUE),2)
+resource <- resource[ which(resource$sd > 0), ]        
+resource <- resource[,-145]   ## attention check
+sortresource <- resource[order(-resource$mean),]
+topresource <- head(sortresource, 10)
+bottomresource <- tail(sortresource,10)
+topresource <- topresource[tail(names(topresource),3)]        
+bottomresource <- bottomresource[tail(names(bottomresource),3)]  
+library(ggplot2)
+resource.overall.t <- ggplot(topresource, aes(x=reorder(description,mean), y=mean)) + geom_bar(stat="identity", color="blue", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Overall") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,6)) 
+resource.overall.b <- ggplot(bottomresource, aes(x=reorder(description,-mean), y=mean)) + geom_bar(stat="identity", color="blue", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Overall") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
+#### Service
+resource <- as.data.frame(t(service[118:202]))           
+resource$description <- labels[c(118:202),1]
+resource$mean <- round(rowMeans(resource[1:nrow(service)], na.rm=TRUE),2)
+resource$sd   <- round(apply(resource[1:nrow(service)], 1, sd, na.rm=TRUE),2)
+resource <- resource[ which(resource$sd > 0), ]        
+resource <- resource[,-145]   ## attention check
+sortresource <- resource[order(-resource$mean),]
+topresource <- head(sortresource, 10)
+bottomresource <- tail(sortresource,10)
+topresource <- topresource[tail(names(topresource),3)]        
+bottomresource <- bottomresource[tail(names(bottomresource),3)]  
+resource.service.t <- ggplot(topresource, aes(x=reorder(description,mean), y=mean)) + geom_bar(stat="identity", color="blue", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Skill") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,6))
+resource.service.b <- ggplot(bottomresource, aes(x=reorder(description,-mean), y=mean)) + geom_bar(stat="identity", color="blue", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Skill") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
+## Knowledge
+resource <- as.data.frame(t(knowledge[118:202]))           
+resource$description <- labels[c(118:202),1]
+resource$mean <- round(rowMeans(resource[1:nrow(knowledge)], na.rm=TRUE),2)
+resource$sd   <- round(apply(resource[1:nrow(knowledge)], 1, sd, na.rm=TRUE),2)
+resource <- resource[ which(resource$sd > 0), ]        
+resource <- resource[,-145]   ## attention check
+sortresource <- resource[order(-resource$mean),]
+topresource <- head(sortresource, 10)
+bottomresource <- tail(sortresource,10)
+topresource <- topresource[tail(names(topresource),3)]        
+bottomresource <- bottomresource[tail(names(bottomresource),3)]  
+resource.knowledge.t <- ggplot(topresource, aes(x=reorder(description,mean), y=mean)) + geom_bar(stat="identity", color="blue", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Knowledge") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,6))
+resource.knowledge.b <- ggplot(bottomresource, aes(x=reorder(description,-mean), y=mean)) + geom_bar(stat="identity", color="blue", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Knowledge") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
+```
+## Resources - Top 10
+```{r}
+resource.overall.t
+```
+
+```{r}
+resource.knowledge.t
+```
+
+```{r}
+resource.service.t
+```
+
+```{r challenges}
+labels <- read.csv("truncatedlabels.csv")            
+challenge <- as.data.frame(t(data[288:372]))           
+challenge$description <- labels[c(288:372),1]
+challenge$mean <- round(rowMeans(challenge[1:nrow(data)], na.rm=TRUE),2)
+challenge$sd   <- round(apply(challenge[1:nrow(data)], 1, sd, na.rm=TRUE),2)
+challenge <- challenge[ which(challenge$sd > 0), ]        
+challenge <- challenge[,-308]   ## attention check
+sortchallenge <- challenge[order(-challenge$mean),]
+topchallenge <- head(sortchallenge, 10)
+bottomchallenge <- tail(sortchallenge,10)
+topchallenge <- topchallenge[tail(names(topchallenge),3)]        
+bottomchallenge <- bottomchallenge[tail(names(bottomchallenge),3)]  
+library(ggplot2)
+challenge.overall.t <- ggplot(topchallenge, aes(x=reorder(description,mean), y=mean)) + geom_bar(stat="identity", color="orange", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Overall") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,6)) 
+challenge.overall.b <- ggplot(bottomchallenge, aes(x=reorder(description,-mean), y=mean)) + geom_bar(stat="identity", color="orange", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Overall") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
+#### Service
+challenge <- as.data.frame(t(service[288:372]))           
+challenge$description <- labels[c(288:372),1]
+challenge$mean <- round(rowMeans(challenge[1:nrow(service)], na.rm=TRUE),2)
+challenge$sd   <- round(apply(challenge[1:nrow(service)], 1, sd, na.rm=TRUE),2)
+challenge <- challenge[ which(challenge$sd > 0), ]        
+challenge <- challenge[,-308]   ## attention check
+sortchallenge <- challenge[order(-challenge$mean),]
+topchallenge <- head(sortchallenge, 10)
+bottomchallenge <- tail(sortchallenge,10)
+topchallenge <- topchallenge[tail(names(topchallenge),3)]        
+bottomchallenge <- bottomchallenge[tail(names(bottomchallenge),3)]  
+challenge.service.t <- ggplot(topchallenge, aes(x=reorder(description,mean), y=mean)) + geom_bar(stat="identity", color="orange", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Skill") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,6))
+challenge.service.b <- ggplot(bottomchallenge, aes(x=reorder(description,-mean), y=mean)) + geom_bar(stat="identity", color="orange", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Skill") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
+## Knowledge
+challenge <- as.data.frame(t(knowledge[288:372]))           
+challenge$description <- labels[c(288:372),1]
+challenge$mean <- round(rowMeans(challenge[1:nrow(knowledge)], na.rm=TRUE),2)
+challenge$sd   <- round(apply(challenge[1:nrow(knowledge)], 1, sd, na.rm=TRUE),2)
+challenge <- challenge[ which(challenge$sd > 0), ]        
+challenge <- challenge[,-308]   ## attention check
+sortchallenge <- challenge[order(-challenge$mean),]
+topchallenge <- head(sortchallenge, 10)
+bottomchallenge <- tail(sortchallenge,10)
+topchallenge <- topchallenge[tail(names(topchallenge),3)]        
+bottomchallenge <- bottomchallenge[tail(names(bottomchallenge),3)]  
+challenge.knowledge.t <- ggplot(topchallenge, aes(x=reorder(description,mean), y=mean)) + geom_bar(stat="identity", color="orange", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Knowledge") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,6))
+challenge.knowledge.b <- ggplot(bottomchallenge, aes(x=reorder(description,-mean), y=mean)) + geom_bar(stat="identity", color="orange", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Knowledge") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
+```
+
+## Challenge Demands - Top 10
+```{r}
+challenge.overall.t
+```
+
+```{r}
+challenge.knowledge.t
+```
+
+```{r}
+challenge.service.t
+```
+## Hindrance Demands - Top 10
+
+```{r hindrances}
+labels <- read.csv("truncatedlabels.csv")            
+hindrance <- as.data.frame(t(data[203:287]))           
+hindrance$description <- labels[c(203:287),1]
+hindrance$mean <- round(rowMeans(hindrance[1:nrow(data)], na.rm=TRUE),2)
+hindrance$sd   <- round(apply(hindrance[1:nrow(data)], 1, sd, na.rm=TRUE),2)
+hindrance <- hindrance[ which(hindrance$sd > 0), ]        
+hindrance <- hindrance[,-248]   ## attention check
+sorthindrance <- hindrance[order(-hindrance$mean),]
+tophindrance <- head(sorthindrance, 10)
+bottomhindrance <- tail(sorthindrance,10)
+tophindrance <- tophindrance[tail(names(tophindrance),3)]        
+bottomhindrance <- bottomhindrance[tail(names(bottomhindrance),3)]  
+library(ggplot2)
+hindrance.overall.t <- ggplot(tophindrance, aes(x=reorder(description,mean), y=mean)) + geom_bar(stat="identity", color="red", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Overall") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5)) 
+hindrance.overall.b <- ggplot(bottomhindrance, aes(x=reorder(description,-mean), y=mean)) + geom_bar(stat="identity", color="red", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Overall") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
+#### Service
+hindrance <- as.data.frame(t(service[203:287]))           
+hindrance$description <- labels[c(203:287),1]
+hindrance$mean <- round(rowMeans(hindrance[1:nrow(service)], na.rm=TRUE),2)
+hindrance$sd   <- round(apply(hindrance[1:nrow(service)], 1, sd, na.rm=TRUE),2)
+hindrance <- hindrance[ which(hindrance$sd > 0), ]        
+hindrance <- hindrance[,-248]   ## attention check
+sorthindrance <- hindrance[order(-hindrance$mean),]
+tophindrance <- head(sorthindrance, 10)
+bottomhindrance <- tail(sorthindrance,10)
+tophindrance <- tophindrance[tail(names(tophindrance),3)]        
+bottomhindrance <- bottomhindrance[tail(names(bottomhindrance),3)]  
+hindrance.service.t <- ggplot(tophindrance, aes(x=reorder(description,mean), y=mean)) + geom_bar(stat="identity", color="red", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Skill") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5)) 
+hindrance.service.b <- ggplot(bottomhindrance, aes(x=reorder(description,-mean), y=mean)) + geom_bar(stat="identity", color="red", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Skill") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
+## Knowledge
+hindrance <- as.data.frame(t(knowledge[203:287]))           
+hindrance$description <- labels[c(203:287),1]
+hindrance$mean <- round(rowMeans(hindrance[1:nrow(knowledge)], na.rm=TRUE),2)
+hindrance$sd   <- round(apply(hindrance[1:nrow(knowledge)], 1, sd, na.rm=TRUE),2)
+hindrance <- hindrance[ which(hindrance$sd > 0), ]        
+hindrance <- hindrance[,-248]   ## attention check
+sorthindrance <- hindrance[order(-hindrance$mean),]
+tophindrance <- head(sorthindrance, 10)
+bottomhindrance <- tail(sorthindrance,10)
+tophindrance <- tophindrance[tail(names(tophindrance),3)]        
+bottomhindrance <- bottomhindrance[tail(names(bottomhindrance),3)]  
+hindrance.knowledge.t <- ggplot(tophindrance, aes(x=reorder(description,mean), y=mean)) + geom_bar(stat="identity", color="red", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Knowledge") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
+hindrance.knowledge.b <- ggplot(bottomhindrance, aes(x=reorder(description,-mean), y=mean)) + geom_bar(stat="identity", color="red", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Knowledge") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5)) 
+```
+
+```{r}
+hindrance.overall.t
+```
+
+```{r}
+hindrance.knowledge.t
+```
+
+```{r}
+hindrance.service.t
+```
+
+### Hypothesis 2 
+
+Hypothesis 2a predicted that job demands with the greatest variability would be moderated by worker type.
+
+Hypothesis 2b predicted that job resources with the greatest variability would be moderated by worker type.
+
+```{r resources_variability, eval=TRUE}
+labels <- read.csv("truncatedlabels.csv")            
+resource <- as.data.frame(t(data[118:202]))           
+resource$description <- labels[c(118:202),1]
+resource$overallmean <- round(rowMeans(resource[1:nrow(data)], na.rm=TRUE),2)
+resource$sd   <- round(apply(resource[1:nrow(data)], 1, sd, na.rm=TRUE),2)
+resource <- resource[,-145]   ## attention check
+sortresource <- resource[order(-resource$sd),]
+topresource <- head(sortresource, 10)
+topresource <- topresource[tail(names(topresource),3)]        
+ 
+data$worker[m3$iscoGroup == "1" | m3$iscoGroup == "2"] <- "Knowledge"
+data$worker[m3$iscoGroup == "3" | m3$iscoGroup == "4" | m3$iscoGroup == "5" | m3$iscoGroup == "6" | m3$iscoGroup == "7" | m3$iscoGroup == "8" | m3$iscoGroup == "9"] <- "Skill"
+t1 <- t.test(item152~worker,data)
+t2 <- t.test(item146~worker,data)
+t3 <- t.test(item133~worker,data)
+t4 <- t.test(item124~worker,data)
+t5 <- t.test(item125~worker,data)
+t6 <- t.test(item122~worker,data)
+t7 <- t.test(item136~worker,data)
+t8 <- t.test(item132~worker,data)
+t9 <- t.test(item161~worker,data)
+t10 <- t.test(item141~worker,data)
+t <- rbind(t1$statistic,t2$statistic,t3$statistic,t4$statistic,t5$statistic,t6$statistic,t7$statistic,t8$statistic,t9$statistic,t10$statistic)
+p <- rbind(t1$p.value,t2$p.value,t3$p.value,t4$p.value,t5$p.value,t6$p.value,t7$p.value,t8$p.value,t9$p.value,t10$p.value)
+Knowledge <- rbind(t1$estimate[[1]],t2$estimate[[1]],t3$estimate[[1]],t4$estimate[[1]],t5$estimate[[1]],t6$estimate[[1]],t7$estimate[[1]],t8$estimate[[1]],t9$estimate[[1]],t10$estimate[[1]])
+Skill <- rbind(t1$estimate[[2]],t2$estimate[[2]],t3$estimate[[2]],t4$estimate[[2]],t5$estimate[[2]],t6$estimate[[2]],t7$estimate[[2]],t8$estimate[[2]],t9$estimate[[2]],t10$estimate[[2]])
+write.csv(topresource, "topresource.csv")
+topresource <- read.csv("topresource.csv")[2:4]
+topresourceplot <- cbind(topresource,t,p,Knowledge,Skill)
+topresourceplot$p <- round(topresourceplot$p,3)
+topresourceplot$Knowledge <- round(topresourceplot$Knowledge,2)
+topresourceplot$Skill <- round(topresourceplot$Skill,2)
+topresourceplot <- topresourceplot[order(-abs(topresourceplot$t)),]
+papaja::apa_table(topresourceplot[c(1,4:7)], # apa contains the data.frame needed for apa_table
+                  caption = "Top 10 resources with the highest level of rating variability (t's across knowledge vs. skilled jobs).",
+                  align = c("m{14cm}","m{1cm}","m{1cm}","m{1cm}","m{1cm}"),
+                  landscape = TRUE,
+                  escape = F)
+```
+
+The top 10 resources with the most variability in ratings yeilded standard deviations of `r min(topresource$sd)` to `r max(topresource$sd)`. T-tests for each of these were conducted and are presented in table XX.
+
+```{r hindrances_variability, eval=TRUE}
+labels <- read.csv("truncatedlabels.csv")            
+hindrance <- as.data.frame(t(data[203:287]))           
+hindrance$description <- labels[c(203:287),1]
+hindrance$overallmean <- round(rowMeans(hindrance[1:nrow(data)], na.rm=TRUE),2)
+hindrance$sd   <- round(apply(hindrance[1:nrow(data)], 1, sd, na.rm=TRUE),2)
+hindrance <- hindrance[,-248]   ## attention check
+sorthindrance <- hindrance[order(-hindrance$sd),]
+tophindrance <- head(sorthindrance, 10)
+tophindrance <- tophindrance[tail(names(tophindrance),3)]        
+ 
+data$worker[m3$iscoGroup == "1" | m3$iscoGroup == "2"] <- "Knowledge"
+data$worker[m3$iscoGroup == "3" | m3$iscoGroup == "4" | m3$iscoGroup == "5" | m3$iscoGroup == "6" | m3$iscoGroup == "7" | m3$iscoGroup == "8" | m3$iscoGroup == "9"] <- "Skill"
+t1 <- t.test(item206~worker,data)
+t2 <- t.test(item203~worker,data)
+t3 <- t.test(item284~worker,data)
+t4 <- t.test(item230~worker,data)
+t5 <- t.test(item239~worker,data)
+t6 <- t.test(item281~worker,data)
+t7 <- t.test(item267~worker,data)
+t8 <- t.test(item218~worker,data)
+t9 <- t.test(item236~worker,data)
+t10 <- t.test(item261~worker,data)
+t <- rbind(t1$statistic,t2$statistic,t3$statistic,t4$statistic,t5$statistic,t6$statistic,t7$statistic,t8$statistic,t9$statistic,t10$statistic)
+p <- rbind(t1$p.value,t2$p.value,t3$p.value,t4$p.value,t5$p.value,t6$p.value,t7$p.value,t8$p.value,t9$p.value,t10$p.value)
+Knowledge <- rbind(t1$estimate[[1]],t2$estimate[[1]],t3$estimate[[1]],t4$estimate[[1]],t5$estimate[[1]],t6$estimate[[1]],t7$estimate[[1]],t8$estimate[[1]],t9$estimate[[1]],t10$estimate[[1]])
+Skill <- rbind(t1$estimate[[2]],t2$estimate[[2]],t3$estimate[[2]],t4$estimate[[2]],t5$estimate[[2]],t6$estimate[[2]],t7$estimate[[2]],t8$estimate[[2]],t9$estimate[[2]],t10$estimate[[2]])
+write.csv(tophindrance, "tophindrance.csv")
+tophindrance <- read.csv("tophindrance.csv")[2:4]
+tophindranceplot <- cbind(tophindrance,t,p,Knowledge,Skill)
+tophindranceplot$p <- round(tophindranceplot$p,3)
+tophindranceplot$Knowledge <- round(tophindranceplot$Knowledge,2)
+tophindranceplot$Skill <- round(tophindranceplot$Skill,2)
+tophindranceplot <- tophindranceplot[order(-abs(tophindranceplot$t)),]
+papaja::apa_table(tophindranceplot[c(1,4:7)], # apa contains the data.frame needed for apa_table
+                  caption = "Top 10 hindrances with the highest level of rating variability (t's across knowledge vs. skilled jobs).",
+                  align = c("m{14cm}","m{1cm}","m{1cm}","m{1cm}","m{1cm}"),
+                  landscape = TRUE,
+                  escape = F)
+```
+
+The top 10 hindrance demands with the most variability in ratings yeilded standard deviations of `r min(tophindrance$sd)` to `r max(tophindrance$sd)`. T-tests for each of these were conducted and are presented in table XX.
+
+```{r challenges_variability, eval=TRUE}
+labels <- read.csv("truncatedlabels.csv")            
+challenge <- as.data.frame(t(data[288:372]))           
+challenge$description <- labels[c(288:372),1]
+challenge$overallmean <- round(rowMeans(challenge[1:nrow(data)], na.rm=TRUE),2)
+challenge$sd   <- round(apply(challenge[1:nrow(data)], 1, sd, na.rm=TRUE),2)
+challenge <- challenge[,-308]   ## attention check
+sortchallenge <- challenge[order(-challenge$sd),]
+topchallenge <- head(sortchallenge, 10)
+topchallenge <- topchallenge[tail(names(topchallenge),3)]        
+ 
+data$worker[m3$iscoGroup == "1" | m3$iscoGroup == "2"] <- "Knowledge"
+data$worker[m3$iscoGroup == "3" | m3$iscoGroup == "4" | m3$iscoGroup == "5" | m3$iscoGroup == "6" | m3$iscoGroup == "7" | m3$iscoGroup == "8" | m3$iscoGroup == "9"] <- "Skill"
+t1 <- t.test(item306~worker,data)
+t2 <- t.test(item298~worker,data)
+t3 <- t.test(item316~worker,data)
+t4 <- t.test(item318~worker,data)
+t5 <- t.test(item311~worker,data)
+t6 <- t.test(item310~worker,data)
+t7 <- t.test(item352~worker,data)
+t8 <- t.test(item317~worker,data)
+t9 <- t.test(item322~worker,data)
+t10 <- t.test(item294~worker,data)
+t <- rbind(t1$statistic,t2$statistic,t3$statistic,t4$statistic,t5$statistic,t6$statistic,t7$statistic,t8$statistic,t9$statistic,t10$statistic)
+p <- rbind(t1$p.value,t2$p.value,t3$p.value,t4$p.value,t5$p.value,t6$p.value,t7$p.value,t8$p.value,t9$p.value,t10$p.value)
+Knowledge <- rbind(t1$estimate[[1]],t2$estimate[[1]],t3$estimate[[1]],t4$estimate[[1]],t5$estimate[[1]],t6$estimate[[1]],t7$estimate[[1]],t8$estimate[[1]],t9$estimate[[1]],t10$estimate[[1]])
+Skill <- rbind(t1$estimate[[2]],t2$estimate[[2]],t3$estimate[[2]],t4$estimate[[2]],t5$estimate[[2]],t6$estimate[[2]],t7$estimate[[2]],t8$estimate[[2]],t9$estimate[[2]],t10$estimate[[2]])
+write.csv(topchallenge, "topchallenge.csv")
+topchallenge <- read.csv("topchallenge.csv")[2:4]
+topchallengeplot <- cbind(topchallenge,t,p,Knowledge,Skill)
+topchallengeplot$p <- round(topchallengeplot$p,3)
+topchallengeplot$Knowledge <- round(topchallengeplot$Knowledge,2)
+topchallengeplot$Skill <- round(topchallengeplot$Skill,2)
+topchallengeplot <- topchallengeplot[order(-abs(topchallengeplot$t)),]
+papaja::apa_table(topchallengeplot[c(1,4:7)], # apa contains the data.frame needed for apa_table
+                  caption = "Top 10 challenges with the highest level of rating variability (t's across knowledge vs. skilled jobs).",
+                  align = c("m{14cm}","m{1cm}","m{1cm}","m{1cm}","m{1cm}"),
+                  landscape = TRUE,
+                  escape = F)
+```
+
+The top 10 challenge demands with the most variability in ratings yeilded standard deviations of `r min(topchallenge$sd)` to `r max(topchallenge$sd)`. T-tests for each of these were conducted and are presented in table XX.
+
+# Low Variability Demands and Resources
+
+The below graphs present the resources, challenges, and hindrances that are *largely agreed on* as indexed by low standard deviations
+
+```{r resourceslowsd}
+labels <- read.csv("truncatedlabels.csv")            
+resource <- as.data.frame(t(data[118:202]))           
+resource$description <- labels[c(118:202),1]
+resource$mean <- round(rowMeans(resource[1:nrow(data)], na.rm=TRUE),2)
+resource$sd   <- round(apply(resource[1:nrow(data)], 1, sd, na.rm=TRUE),2)
+resource <- resource[,-145]   ## attention check
+resource <- resource[ which(resource$sd > 0), ] 
+sortresource <- resource[order(resource$sd),]
+topresource <- head(sortresource, 10)
+topresource <- topresource[tail(names(topresource),3)]        
+library(ggplot2)
+ggplot(topresource, aes(x=reorder(description,-sd), y=mean)) + geom_bar(stat="identity", color="black", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Resources (Agreement)") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5)) 
+```
+
+```{r challengesagree}
+labels <- read.csv("truncatedlabels.csv")            
+challenge <- as.data.frame(t(data[288:372]))           
+challenge$description <- labels[c(288:372),1]
+challenge$mean <- round(rowMeans(challenge[1:nrow(data)], na.rm=TRUE),2)
+challenge$sd   <- round(apply(challenge[1:nrow(data)], 1, sd, na.rm=TRUE),2)
+challenge <- challenge[,-308]   ## attention check
+challenge <- challenge[ which(challenge$sd > 0), ] 
+sortchallenge <- challenge[order(challenge$sd),]
+topchallenge <- head(sortchallenge, 10)
+topchallenge <- topchallenge[tail(names(topchallenge),3)]        
+library(ggplot2)
+ggplot(topchallenge, aes(x=reorder(description,-sd), y=mean)) + geom_bar(stat="identity", color="black", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Agreement (Challenges)") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5)) 
+```
+
+```{r hindrancesagree}
+labels <- read.csv("truncatedlabels.csv")            
+hindrance <- as.data.frame(t(data[203:287]))           
+hindrance$description <- labels[c(203:287),1]
+hindrance$mean <- round(rowMeans(hindrance[1:nrow(data)], na.rm=TRUE),2)
+hindrance$sd   <- round(apply(hindrance[1:nrow(data)], 1, sd, na.rm=TRUE),2)
+hindrance <- hindrance[,-248]   ## attention check
+hindrance <- hindrance[ which(hindrance$sd > 0), ] 
+sorthindrance <- hindrance[order(hindrance$sd),]
+tophindrance <- head(sorthindrance, 10)
+tophindrance <- tophindrance[tail(names(tophindrance),3)]        
+library(ggplot2)
+ggplot(tophindrance, aes(x=reorder(description,-sd), y=mean)) + geom_bar(stat="identity", color="black", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Agreement (Hindrances)") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
+```
 
 
 # Discussion
 
 The findings generally suggest there is greater consensus/less variability regarding ratings of job characteristics deemed resources and challenge demands, but much greater variability in those characteristics rated as hindrances. There was considerable overlap in the top 10 resources that emerged from those classified as knowledge and skill workers. 
 
-These findings provide support for moving away from the a priori classification of job characteristics as either demands or resources. Moreover, demands should be further deliniated as challenges or hindrances. In line with Webster and colleagues (2011), there are not only characteristics of work that may be identified as both challenge and hindrance demands, but they can be simultaneously perceived as challenge demands and resources. This suggests that overcoming or managing challenge demands may serve the same purpose as a resource, such as increasing motivation and engagement with their work. The overlap between the classification of resources suggests that there might be job characteristics that universally serve as resources to varying degrees depending on the type of work. 
+These findings provide support for moving away from the a priori classification of job characteristics as either demands or resources. Moreover, demands should be further deliniated as challenges or hindrances. This suggests that overcoming or managing challenge demands may serve the same purpose as a resource, such as increasing motivation and engagement with their work. The overlap between the classification of resources suggests that there might be job characteristics that universally serve as resources to varying degrees depending on the type of work. 
 
 ```{r, include=FALSE}
 knitr::write_bib(c('knitr','rmarkdown','posterdown','pagedown'), 'packages.bib')
