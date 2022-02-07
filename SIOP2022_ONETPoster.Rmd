@@ -64,7 +64,7 @@ Each of the 98 descriptors has potentially unique response categories, but scali
 
 ## top 10 demands and resources, divided by skilled versus knowledge workers
 
-```{r study1}
+```{r study1, warning=FALSE}
 
 temp <- read.csv("initial_data_screen.csv", header=FALSE, na.strings="")   ## NOTE: 404 vars (9/28/21) make sure to check indexing used throughout script
 
@@ -1668,7 +1668,7 @@ data$item372[data$item372 == 15] <- 5
 
 ```
 
-```{r generalrankings}
+```{r generalrankings, warning=FALSE}
 labels <- read.csv("truncatedlabels.csv")            
 chars <- as.data.frame(t(data[22:117]))           
 chars$description <- labels[c(22:117),1]
