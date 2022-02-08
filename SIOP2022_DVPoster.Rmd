@@ -42,48 +42,25 @@ Research on the job demands-resources theory (Bakker & Demerouti, 2017) highligh
 > *Hypothesis 3:* Job characteristics appraised as hindrance demands will be negatively associated with engagement, and positively associated with stress and burnout.
 
 # Methods
-We evaluated associations between the antecedents and proximal outcomes of the Job Demands-Resources model (Bakker & Demerouti, 2017; Bakker et al., 2003; Demerouti et al., 2001), within the unifying framework of ONet. Specifically, focusing on the relationship between job components and employee levels of job engagement, job stress, and burnout. Jobs were classified into the International Standard Classification of Occupations (ISCO), and we further categorized these into “knowledge” (n = 320) versus “skill” (n = 214) occupations. Our sample consists of 568 Prolific Panel participants.
+We evaluated associations between the antecedents and proximal outcomes of the Job Demands-Resources model (Bakker & Demerouti, 2017; Bakker et al., 2003; Demerouti et al., 2001), within the unifying framework of ONet. Specifically, focusing on the relationship between job characteristics and employee levels of job engagement, stress, and burnout. Jobs were classified into the International Standard Classification of Occupations (ISCO), and we further categorized these into “knowledge” (n = 320) versus “skill” (n = 214) occupations. Our sample consists of 568 Prolific Panel participants.
 
-### Materials
-**Characteristics, Demands, and Resources.** ONet’s classifications of work activity (including Information Input,  Interacting with Others, Mental Processes, and Work Output) and work context (including Interpersonal Relationships, Physical Work Conditions, and Structural Job Characteristics) were used.
-
-**Burnout and Stress.** The Copenhagen Psychosocial Questionnaire was used (Burr et al., 2019), including 4 burnout and 3 stress items with current sample α’s of 0.85 (burnout) and 0.85 (stress). 
-
-**Engagement.** The 18-item engagement measure specifies three subscales which yielded current sample α’s of 0.68 (Absorption) and 0.80 (Vigor), and 0.90 (Dedication; Russell et al., 2022). For the purposes of the current study, we focused on an overall engagement score (18 item aggregate, α = 0.91). 
-
-### Procedure
-Data was collected through Prolific using a survey hosted in Qualtrics.  Participants were emailed regarding their eligibility to participate and voluntarily responded to the survey. The requirements to participate included being 18 or older and holding a part- or full-time job. 
+We examined job characteristics based on O*Net's subcategories under work activity and work context. Burnout and stress were measured using the Copenhagen Psychosocial Questionnaire (Burr et al., 2019), and an overall engagement score was measured using an 18-item measure (Russell et al., 2022).
 
 # Results
+The average perception that an ONet job element could be considered a resource was 3.77 with a standard deviation of 0.48 (see Table1), that it could be considered a challenge was 3.75 with a standard deviation of 0.50 (see Table 2), and that it could be considered a hindrance was 2.39 with a standard deviation of 0.7 (see Table 3).
 
-The average perception that an O*Net job element could be considered a resource was 3.77 with a standard deviation of 0.48 (see Table1). Regression analyses reveal that the more a work characteristic is perceived as a resource, the more engaged is the respondent (R2 = .15, F(7, 528) = 12.82, p < .001). 
-
-The average perception that an ONet job element could be considered a challenge was 3.75 with a standard deviation of 0.50 (see Table 2). Regressions reveal that the impact of challenging demands on engagement was similar in direction and magnitude to that of resources, as consistent with JD-R predictions (R2 = .13, F(7, 528) = 11.03, p < .001), with null effects for both stress (R2 = .01, F(7, 528) = 0.88, p = .520) and burnout (R2 = .02, F(7, 528) = 1.21, p = .295). 
-
-The average perception that an ONet job element could be considered a hindrance was 2.39 with a standard deviation of 0.7 (see Table 3). There was a marginal association between a work characteristic being perceived as a greater hindrance and lower levels of engagement (R2 = .07, F(7, 528) = 5.84, p < .001), with similar effects both between being viewed as a hindrance and increased stress (R2 = .06, F(7, 528) = 4.88, p < .001) and  increased levels of burnout (R2 = .06, F(7, 528) = 4.90, p < .001).
-
-We used `posterdown` version `r packageVersion("posterdown")` [@R-posterdown].
-
-```{r mytable, out.width='80%'}
-knitr::kable(iris[1:10, 1:4], caption = 'Table caption.',align = 'c',"html")
-```
-
- Figure \@ref(fig:standard-plot), or Figure \@ref(fig:morefigs).
-
-```{r standard-plot, out.width='80%', fig.align='center', fig.cap='Great figure!', fig.height=5}
-
-```
-
-```{r morefigs, out.width='80%', echo=TRUE, fig.cap='Amazing, right?!', fig.height=5}
-
-
-```
-
+Regression analyses reveal that the more a work characteristic is perceived as a resource, the more engaged is the respondent (R2 = .15, F(7, 528) = 12.82, p < .001). Moreover, the impact of challenging demands on engagement was similar in direction and magnitude to that of resources (R2 = .13, F(7, 528) = 11.03, p < .001), with null effects for both stress (R2 = .01, F(7, 528) = 0.88, p = .520) and burnout (R2 = .02, F(7, 528) = 1.21, p = .295). There was a marginal association between a work characteristic being perceived as a hindrance and lower levels of engagement (R2 = .07, F(7, 528) = 5.84, p < .001), with similar effects both between being viewed as a hindrance and increased stress (R2 = .06, F(7, 528) = 4.88, p < .001) and burnout (R2 = .06, F(7, 528) = 4.90, p < .001).
 
 # Discussion 
+Largely aligning with the job-demands resources theory (Demerouti et al., 2001), our results indicated that work characteristics perceived as resources were associated with greater engagement. Similarily,  characteristics perceived as challenge demands were associated with higher engagement. Further, job characteristics deemed hindrance demands were associated with lower engagement, higher stress, and greater burnout. These results support prior research on the potential impact of challenge stressors on work outcomes (e.g., Cavanaugh et al., 2000; Podsakoff et al., 2007).
+
+Our results highlight the importance in noting the distinction between types of demands in future research and practice. The overall experience of an element as a challenge or demand had very little overlap, whereas the same element was much more likely to be viewed as both a resource and a challenge. Employers would benefit from understanding what work demands may be perceived as challenges, and leveraging them to increase desired work outcomes (e.g., engagement). 
 
 ```{r, include=FALSE}
 knitr::write_bib(c('knitr','rmarkdown','posterdown','pagedown'), 'packages.bib')
 ```
 
 # References
+
+ Figure \@ref(fig:standard-plot), or Figure \@ref(fig:morefigs).
+ We used `posterdown` version `r packageVersion("posterdown")` [@R-posterdown].
