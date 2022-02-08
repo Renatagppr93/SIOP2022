@@ -17,6 +17,13 @@ primary_colour: "#640d14"      ## https://coolors.co/250902-38040e-640d14-800e13
 secondary_colour: "#ad2831"
 accent_colour: "#38040e"
 column_numbers: 3
+title_textsize: "110pt"
+main_picwidth: "55%"
+main_findings: 
+  - '![](){.main_pic}' # main_pic is used to center align 
+  - '![](){.main_pic}' 
+Logoleft_name: '![]()'
+
 #logoright_name: https&#58;//www.uwstout.edu/sites/default/files/styles/medium/public/2020-12/stoutlogo_quill.jpg?h=93e672f9&itok=68FWq9LN
 
 #logoleft_name: https&#58;//www.montclair.edu/university-communications/wp-content/uploads/sites/144/2020/10/presidential-seal.svg
@@ -30,6 +37,11 @@ bibliography: packages.bib
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r plots, include = FALSE}
+
+
 ```
 
 # Introduction
@@ -49,12 +61,12 @@ We examined job characteristics based on O*Net's subcategories under work activi
 # Results
 The average perception that an ONet job element could be considered a resource was 3.77 with a standard deviation of 0.48 (see Table1), that it could be considered a challenge was 3.75 with a standard deviation of 0.50 (see Table 2), and that it could be considered a hindrance was 2.39 with a standard deviation of 0.7 (see Table 3).
 
-Regression analyses reveal that the more a work characteristic is perceived as a resource, the more engaged is the respondent (R2 = .15, F(7, 528) = 12.82, p < .001). Moreover, the impact of challenging demands on engagement was similar in direction and magnitude to that of resources (R2 = .13, F(7, 528) = 11.03, p < .001), with null effects for both stress (R2 = .01, F(7, 528) = 0.88, p = .520) and burnout (R2 = .02, F(7, 528) = 1.21, p = .295). There was a marginal association between a work characteristic being perceived as a hindrance and lower levels of engagement (R2 = .07, F(7, 528) = 5.84, p < .001), with similar effects both between being viewed as a hindrance and increased stress (R2 = .06, F(7, 528) = 4.88, p < .001) and burnout (R2 = .06, F(7, 528) = 4.90, p < .001).
+Regression analyses reveal that the more a work characteristic is perceived as a resource, the more engaged is the respondent (R2 = .15, F(7, 528) = 12.82, p < .001). The impact of challenge demands on engagement was similar in direction and magnitude to that of resources (R2 = .13, F(7, 528) = 11.03, p < .001), with null effects for both stress (R2 = .01, F(7, 528) = 0.88, p = .520) and burnout (R2 = .02, F(7, 528) = 1.21, p = .295). There was a marginal association between a work characteristic perceived as a hindrance and lower levels of engagement (R2 = .07, F(7, 528) = 5.84, p < .001), with similar effects both between being viewed as a hindrance and increased stress (R2 = .06, F(7, 528) = 4.88, p < .001) and burnout (R2 = .06, F(7, 528) = 4.90, p < .001).
 
 # Discussion 
-Largely aligning with the job-demands resources theory (Demerouti et al., 2001), our results indicated that work characteristics perceived as resources were associated with greater engagement. Similarily,  characteristics perceived as challenge demands were associated with higher engagement. Further, job characteristics deemed hindrance demands were associated with lower engagement, higher stress, and greater burnout. These results support prior research on the potential impact of challenge stressors on work outcomes (e.g., Cavanaugh et al., 2000; Podsakoff et al., 2007).
+Largely aligning with the job-demands resources theory (Demerouti et al., 2001), our results indicated that work characteristics perceived as resources were associated with greater engagement. Similarily,  characteristics perceived as challenge demands were associated with higher engagement. Further, job characteristics deemed hindrance demands were associated with lower engagement, higher stress, and greater burnout. 
 
-Our results highlight the importance in noting the distinction between types of demands in future research and practice. The overall experience of an element as a challenge or demand had very little overlap, whereas the same element was much more likely to be viewed as both a resource and a challenge. Employers would benefit from understanding what work demands may be perceived as challenges, and leveraging them to increase desired work outcomes (e.g., engagement). 
+These results support prior research on the potential impact of challenge stressors on work outcomes (e.g., Cavanaugh et al., 2000; Podsakoff et al., 2007). Our results highlight the importance in noting the distinction between types of demands in future research and practice. Employers would benefit from understanding what work demands may be perceived as challenges, and leveraging them to increase desired work outcomes (e.g., engagement). 
 
 ```{r, include=FALSE}
 knitr::write_bib(c('knitr','rmarkdown','posterdown','pagedown'), 'packages.bib')
