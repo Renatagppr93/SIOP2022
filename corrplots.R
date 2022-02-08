@@ -93,8 +93,8 @@ res.cor %>% rearrange(method="MDS", absolute=FALSE) %>% shave(upper=FALSE) %>% r
 
 res.cor %>% network_plot(min_cor = .4)
 
-new <- cor(data[,c(413, 411:412, 428:434)], use="complete.obs")
-corrplot(new, type="upper", order="hclust", tl.col="black", tl.srt=45, diag=TRUE)
+new2 <- cor(data[,c(413, 411:412, 428:434)], use="complete.obs")
+corrplot(new2, type="upper", order="hclust", tl.col="black", tl.srt=45, diag=TRUE)
 
 ## Hindrance:
 
@@ -107,6 +107,6 @@ res.cor %>% rearrange(method="MDS", absolute=FALSE) %>% shave(upper=FALSE) %>% r
 
 res.cor %>% network_plot(min_cor = .4)
 
-new <- cor(data[,c(413, 411:412, 421:427)], use="complete.obs")
-corrplot(new, type="upper", order="hclust", tl.col="black", tl.srt=45, diag=TRUE)
+new3 <- cor(data[,c(413, 411:412, 421:427)], use="complete.obs")
+corrplot(new3, type="upper", order="hclust", tl.col="black", tl.srt=45, diag=TRUE)
 
