@@ -18,8 +18,8 @@ secondary_colour: "#ad2831"
 accent_colour: "#38040e"
 column_numbers: 3
 body_textsize: "50px"
-#logoright_name: 
-#logoleft_name: 
+logoright_name: https&#58;//raw.githubusercontent.com/brentthorne/posterdown/master/images/betterhexlogo.png
+logoleft_name: https&#58;//www.montclair.edu/university-communications/wp-content/uploads/sites/144//2020/10/hawk-logo-color.svg
 output: 
   posterdown::posterdown_html:
     self_contained: false
@@ -104,7 +104,7 @@ numvalid <- nrow(data)
 
 ```
 
-```{r demos}
+```{r demos, warning=FALSE}
 
 a <- descr::freq(use$item401, plot=FALSE)
 
@@ -1771,18 +1771,9 @@ resource.knowledge.t <- ggplot(topresource, aes(x=reorder(description,mean), y=m
 resource.knowledge.b <- ggplot(bottomresource, aes(x=reorder(description,-mean), y=mean)) + geom_bar(stat="identity", color="blue", position=position_dodge()) + theme_bw() +
   scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Knowledge") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
 ```
-## Figure 1. Overall Top 10 Resources  
 
-```{r}
+```{r figure1, fig.width=14, fig.height=6, fig.cap="Overall Top 10 Resources"}
 resource.overall.t
-```
-
-```{r, eval=FALSE}
-resource.knowledge.t
-```
-
-```{r, eval=FALSE}
-resource.service.t
 ```
 
 ```{r challenges}
@@ -1837,20 +1828,10 @@ challenge.knowledge.b <- ggplot(bottomchallenge, aes(x=reorder(description,-mean
   scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Knowledge") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
 ```
 
-## Figure 2. Overall Top 10 Challenge Demands  
-
-```{r}
+```{r figure2, fig.width=14, fig.height=6, fig.cap="Overall Top 10 Challenge Demands"}
 challenge.overall.t
 ```
 
-```{r, eval=FALSE}
-challenge.knowledge.t
-```
-
-```{r, eval=FALSE}
-challenge.service.t
-```
-## Figure 3. Overall Top 10 Hindrance Demands  
 
 ```{r hindrances}
 labels <- read.csv("truncatedlabels.csv")            
@@ -1904,17 +1885,10 @@ hindrance.knowledge.b <- ggplot(bottomhindrance, aes(x=reorder(description,-mean
   scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Knowledge") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5)) 
 ```
 
-```{r}
+```{r figure3, fig.width=14, fig.height=6, fig.cap="Overall Top 10 Hindrance Demands"}
 hindrance.overall.t
 ```
 
-```{r, eval=FALSE}
-hindrance.knowledge.t
-```
-
-```{r, eval=FALSE}
-hindrance.service.t
-```
 ```{r resources_variability, eval=TRUE}
 labels <- read.csv("truncatedlabels.csv")            
 resource <- as.data.frame(t(data[118:202]))           
