@@ -119,7 +119,7 @@ res.cor %>% network_plot(min_cor = .4)
 library(corrplot)
 
 new <- cor(data[,c(413, 411:412, 414:420)], use="complete.obs")
-corrplot(new, type="upper", order="hclust", tl.col="black", tl.srt=45, diag=TRUE)
+corrplot(new, type="upper", order="hclust", tl.col="black", tl.srt=45, diag=FALSE)
 
 ## Challenge:
 
@@ -133,7 +133,7 @@ res.cor %>% rearrange(method="MDS", absolute=FALSE) %>% shave(upper=FALSE) %>% r
 res.cor %>% network_plot(min_cor = .4)
 
 new2 <- cor(data[,c(413, 411:412, 428:434)], use="complete.obs")
-corrplot(new2, type="upper", order="hclust", tl.col="black", tl.srt=45, diag=TRUE)
+corrplot(new2, type="upper", order="hclust", tl.col="black", tl.srt=45, diag=FALSE)
 
 ## Hindrance:
 
@@ -147,28 +147,31 @@ res.cor %>% rearrange(method="MDS", absolute=FALSE) %>% shave(upper=FALSE) %>% r
 res.cor %>% network_plot(min_cor = .4)
 
 new3 <- cor(data[,c(413, 411:412, 421:427)], use="complete.obs")
-corrplot(new3, type="upper", order="hclust", tl.col="black", tl.srt=45, diag=TRUE)
+corrplot(new3, type="upper", order="hclust", tl.col="black", tl.srt=45, diag=FALSE)
 
 ```
 
 
 ```{r ResourPlot, include = FALSE}
+
 svg("ResourPlot.svg")
-corrplot(new, type="upper", order="hclust", tl.col="black", tl.srt=45, diag=TRUE)
+corrplot(new, type="upper", order="hclust", tl.col="black", tl.srt=45, diag=FALSE)
 dev.off()
 
 ```
 
 ```{r ChallPlot, include = FALSE}
+
 svg("ChallPlot.svg")
-corrplot(new2, type="upper", order="hclust", tl.col="black", tl.srt=45, diag=TRUE)
+corrplot(new2, type="upper", order="hclust", tl.col="black", tl.srt=45, diag=FALSE)
 dev.off()
 
 ```
 
 ```{r HinderPlot, include = FALSE}
+
 svg("HinderPlot.svg")
-corrplot(new3, type="upper", order="hclust", tl.col="black", tl.srt=45, diag=TRUE)
+corrplot(new3, type="upper", order="hclust", tl.col="black", tl.srt=45, diag=FALSE)
 dev.off()
 
 ```
