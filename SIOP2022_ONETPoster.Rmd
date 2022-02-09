@@ -17,7 +17,7 @@ primary_colour: "#640d14"      ## https://coolors.co/250902-38040e-640d14-800e13
 secondary_colour: "#ad2831"
 accent_colour: "#38040e"
 column_numbers: 3
-body_textsize: "55px"
+body_textsize: "50px"
 #logoright_name: 
 #logoleft_name: 
 output: 
@@ -32,15 +32,11 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Introduction
 
-The job demands-resources model (Demerouti et al., 2001) and later job demands-resources theory (Bakker & Demerouti, 2017) have inspired a plethora of study on the process and experience of job stress and employee motivation. We explore a key assumption of this process - that of the objective nature of job characteristics as either demands or resources.
-
-The major objective of this project is to document whether job characteristics (from O*NET) should be interpreted as possibly vacillating between resources and demands. We further present descriptive information regarding which job characteristics are deemed the strongest as well as most variable resources and demands across jobs and by type of employee (knowledge or skill worker classification).
+The major objective of this project is to document whether job characteristics (from O*NET) should be interpreted as possibly vacillating between resources and demands (Bakker & Demerouti, 2017). We further present descriptive information regarding which job characteristics are deemed the strongest as well as most variable resources and demands across jobs and by type of employee (knowledge or skill worker classification).
 
 * Hypothesis 1: Job characteristics differ in variability/stability regarding subjective worker perception as a demand or resource.
 * Hypothesis 2: Job characteristics are not uniquely categorized as a resource or demand, but rather, some job characteristics are rated highly as both a resource and a demand.
-* Hypothesis 3a: Some of the variability in evaluation as resources may be attributable to the type of work being done. 
-* Hypothesis 3b: Some of the variability in evaluation as challenge demands may be attributable to the type of work being done. 
-* Hypothesis 3c: Some of the variability in evaluation as hindrance demands may be attributable to the type of work being done. 
+* Hypothesis 3a-c: Some of the variability in evaluation as (a) resources, (b) challenge demands, and (c) hindrance demands may be attributable to the type of work being done. 
 
 # Methods  
 
@@ -60,9 +56,12 @@ Each of the 98 descriptors has potentially unique response categories, but scali
 
 # Results
 
+H1: Resources and challenges are agreed upon (range of lowest 10 resource SDs is 0.70-0.88; challenge 0.79-0.87). Hindrances varied more: SDs 1.32-1.41, providing support for H1. 
 
+H2: There is some overlap between the highest rated resource and job challenge categories (7 of 10 of the highest rated resources and challenge demands across workers were shared)We do not see such a pattern regarding hindrance stressors, generally suggesting support for H2. 
 
-## top 10 demands and resources, divided by skilled versus knowledge workers
+H3: There is overlap between those reported by knowledge and skilled workers. Of the top 10, 8 of the challenge demands, 9 of the hindrance demands, and 7 of the resources overlapped by both knowledge and skilled workers. Independent-samples t-tests revealed the top 3 resources and challenge demands were rated higher by skilled workers, whereas the top 2 hindrance demands were rated higher by knowledge workers. In sum, these results suggest partial support for H3a-c. 
+
 
 ```{r study1, warning=FALSE}
 
@@ -1668,7 +1667,7 @@ data$item372[data$item372 == 15] <- 5
 
 ```
 
-```{r generalrankings, warning=FALSE}
+```{r generalrankings, warning=FALSE, eval=FALSE}
 labels <- read.csv("truncatedlabels.csv")            
 chars <- as.data.frame(t(data[22:117]))           
 chars$description <- labels[c(22:117),1]
@@ -1720,7 +1719,7 @@ knowledge.b <- ggplot(bottomchars, aes(x=reorder(description,-mean), y=mean)) + 
   scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Knowledge") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
 ```
 
-```{r resources}
+```{r resources, fig.align = "center"}
 labels <- read.csv("truncatedlabels.csv")            
 resource <- as.data.frame(t(data[118:202]))           
 resource$description <- labels[c(118:202),1]
@@ -1736,6 +1735,7 @@ bottomresource <- bottomresource[tail(names(bottomresource),3)]
 library(ggplot2)
 resource.overall.t <- ggplot(topresource, aes(x=reorder(description,mean), y=mean)) + geom_bar(stat="identity", color="blue", position=position_dodge()) + theme_bw() +
   scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Overall") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,6)) 
+
 resource.overall.b <- ggplot(bottomresource, aes(x=reorder(description,-mean), y=mean)) + geom_bar(stat="identity", color="blue", position=position_dodge()) + theme_bw() +
   scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Overall") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
 #### Service
@@ -1771,16 +1771,17 @@ resource.knowledge.t <- ggplot(topresource, aes(x=reorder(description,mean), y=m
 resource.knowledge.b <- ggplot(bottomresource, aes(x=reorder(description,-mean), y=mean)) + geom_bar(stat="identity", color="blue", position=position_dodge()) + theme_bw() +
   scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Knowledge") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
 ```
-## Resources - Top 10
+## Figure 1. Overall Top 10 Resources  
+
 ```{r}
 resource.overall.t
 ```
 
-```{r}
+```{r, eval=FALSE}
 resource.knowledge.t
 ```
 
-```{r}
+```{r, eval=FALSE}
 resource.service.t
 ```
 
@@ -1836,19 +1837,20 @@ challenge.knowledge.b <- ggplot(bottomchallenge, aes(x=reorder(description,-mean
   scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Knowledge") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
 ```
 
-## Challenge Demands - Top 10
+## Figure 2. Overall Top 10 Challenge Demands  
+
 ```{r}
 challenge.overall.t
 ```
 
-```{r}
+```{r, eval=FALSE}
 challenge.knowledge.t
 ```
 
-```{r}
+```{r, eval=FALSE}
 challenge.service.t
 ```
-## Hindrance Demands - Top 10
+## Figure 3. Overall Top 10 Hindrance Demands  
 
 ```{r hindrances}
 labels <- read.csv("truncatedlabels.csv")            
@@ -1906,20 +1908,13 @@ hindrance.knowledge.b <- ggplot(bottomhindrance, aes(x=reorder(description,-mean
 hindrance.overall.t
 ```
 
-```{r}
+```{r, eval=FALSE}
 hindrance.knowledge.t
 ```
 
-```{r}
+```{r, eval=FALSE}
 hindrance.service.t
 ```
-
-### Hypothesis 2 
-
-Hypothesis 2a predicted that job demands with the greatest variability would be moderated by worker type.
-
-Hypothesis 2b predicted that job resources with the greatest variability would be moderated by worker type.
-
 ```{r resources_variability, eval=TRUE}
 labels <- read.csv("truncatedlabels.csv")            
 resource <- as.data.frame(t(data[118:202]))           
@@ -1957,9 +1952,7 @@ topresourceplot <- topresourceplot[order(-abs(topresourceplot$t)),]
 
 ```
 
-The top 10 resources with the most variability in ratings yeilded standard deviations of `r min(topresource$sd)` to `r max(topresource$sd)`. T-tests for each of these were conducted and are presented in table XX.
-
-```{r hindrances_variability, eval=TRUE}
+```{r hindrances_variability, eval=FALSE}
 labels <- read.csv("truncatedlabels.csv")            
 hindrance <- as.data.frame(t(data[203:287]))           
 hindrance$description <- labels[c(203:287),1]
@@ -1996,9 +1989,7 @@ tophindranceplot <- tophindranceplot[order(-abs(tophindranceplot$t)),]
 
 ```
 
-The top 10 hindrance demands with the most variability in ratings yeilded standard deviations of `r min(tophindrance$sd)` to `r max(tophindrance$sd)`. T-tests for each of these were conducted and are presented in table XX.
-
-```{r challenges_variability, eval=TRUE}
+```{r challenges_variability, eval=FALSE}
 labels <- read.csv("truncatedlabels.csv")            
 challenge <- as.data.frame(t(data[288:372]))           
 challenge$description <- labels[c(288:372),1]
@@ -2035,13 +2026,7 @@ topchallengeplot <- topchallengeplot[order(-abs(topchallengeplot$t)),]
 
 ```
 
-The top 10 challenge demands with the most variability in ratings yeilded standard deviations of `r min(topchallenge$sd)` to `r max(topchallenge$sd)`. T-tests for each of these were conducted and are presented in table XX.
-
-# Low Variability Demands and Resources
-
-The below graphs present the resources, challenges, and hindrances that are *largely agreed on* as indexed by low standard deviations
-
-```{r resourceslowsd}
+```{r resourceslowsd, eval=FALSE}
 labels <- read.csv("truncatedlabels.csv")            
 resource <- as.data.frame(t(data[118:202]))           
 resource$description <- labels[c(118:202),1]
@@ -2057,7 +2042,7 @@ ggplot(topresource, aes(x=reorder(description,-sd), y=mean)) + geom_bar(stat="id
   scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Resources (Agreement)") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5)) 
 ```
 
-```{r challengesagree}
+```{r challengesagree, eval=FALSE}
 labels <- read.csv("truncatedlabels.csv")            
 challenge <- as.data.frame(t(data[288:372]))           
 challenge$description <- labels[c(288:372),1]
@@ -2073,7 +2058,7 @@ ggplot(topchallenge, aes(x=reorder(description,-sd), y=mean)) + geom_bar(stat="i
   scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Agreement (Challenges)") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5)) 
 ```
 
-```{r hindrancesagree}
+```{r hindrancesagree, eval=FALSE}
 labels <- read.csv("truncatedlabels.csv")            
 hindrance <- as.data.frame(t(data[203:287]))           
 hindrance$description <- labels[c(203:287),1]
