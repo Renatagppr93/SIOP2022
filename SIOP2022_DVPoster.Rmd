@@ -18,11 +18,11 @@ secondary_colour: "#ad2831"
 accent_colour: "#38040e"
 column_numbers: 3
 title_textsize: "105pt"
-main_picwidth: "55%"
+#main_picwidth: "55%"
 main_findings: 
   - '![](ResourPlot.svg){.main_pic}' # main_pic is used to center align 
-  - '![](ChallPlot.svg){.main_pic}'
-  - '![](HinderPlot.svg){.main_pic}'
+#  - '![](ChallPlot.svg){.main_pic}'
+#  - '![](HinderPlot.svg){.main_pic}'
 #logoright_name: https&#58;//www.uwstout.edu/sites/default/files/styles/medium/public/2020-12/stoutlogo_quill.jpg?h=93e672f9&itok=68FWq9LN
 #logoleft_name: https&#58;//www.montclair.edu/university-communications/wp-content/uploads/sites/144/2020/10/presidential-seal.svg
 #logoleft_name: https&#58;//www.montclair.edu/university-communications/wp-content/uploads/sites/144//2020/10/hawk-logo-color.svg
@@ -35,6 +35,23 @@ bibliography: packages.bib
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{css, echo=FALSE}
+.main_pic {
+  border-radius: 50%;
+  width: 100%;
+  vertical-align: top;
+}
+
+.top_pic {
+  width: 400px;  
+  height: 150px;  
+  border: 5px solid red;  
+  background-color: lightgreen;  
+  object-fit: none;  
+  object-position: center top;
+}
 ```
 
 ```{r data, include = FALSE}
