@@ -17,7 +17,7 @@ primary_colour: "#640d14"      ## https://coolors.co/250902-38040e-640d14-800e13
 secondary_colour: "#ad2831"
 accent_colour: "#38040e"
 column_numbers: 3
-title_textsize: "105pt"
+title_textsize: "105pt"         ## https://githubhelp.com/brentthorne/posterdown
 #main_picwidth: "55%"
 main_findings: 
   - '![](ResourPlot.svg){.main_pic}' # main_pic is used to center align 
@@ -27,6 +27,9 @@ main_findings:
 #logoleft_name: https&#58;//www.montclair.edu/university-communications/wp-content/uploads/sites/144/2020/10/presidential-seal.svg
 #logoleft_name: https&#58;//www.montclair.edu/university-communications/wp-content/uploads/sites/144//2020/10/hawk-logo-color.svg
 csl: "apa7.csl"
+titlebox_height: "5%"
+poster_height: "40in"
+poster_width: "70in"
 output: 
     posterdown::posterdown_betterland:
     self_contained: false
@@ -40,7 +43,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ```{css, echo=FALSE}
 .main_pic {
   border-radius: 50%;
-  width: 100%;
+  width: 90%;
   vertical-align: top;
 }
 
