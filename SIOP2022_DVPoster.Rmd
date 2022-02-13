@@ -3,11 +3,12 @@ title: 'O\*Net Demands and Resources: Associations with Stress, Burnout, and Eng
 author:
   - name: Renata Garcia Prieto Palacios Roji
     affil: 1
-    orcid: '0000-0002-1099-3857'
   - name: Alicia Stachowski
     affil: 2
+    orcid: '0000-0003-3595-6339'
   - name: John Kulas
     affil: 1
+    orcid: '0000-0003-4780-421X'
 affiliation:
   - num: 1
     address: Montclair State University
@@ -18,18 +19,18 @@ secondary_colour: "#ad2831"
 accent_colour: "#38040e"
 column_numbers: 3
 title_textsize: "105pt"         ## https://githubhelp.com/brentthorne/posterdown
-#main_picwidth: "55%"
+#main_picwidth: "55%"           ## https://github.com/brentthorne/posterdown/wiki/posterdown_betterland
 main_findings: 
+#  - 'Big findings here & supplement in text'
   - '![](ResourPlot.svg){.main_pic}' # main_pic is used to center align 
 #  - '![](ChallPlot.svg){.main_pic}'
 #  - '![](HinderPlot.svg){.main_pic}'
 #logoright_name: https&#58;//www.uwstout.edu/sites/default/files/styles/medium/public/2020-12/stoutlogo_quill.jpg?h=93e672f9&itok=68FWq9LN
-#logoleft_name: https&#58;//www.montclair.edu/university-communications/wp-content/uploads/sites/144/2020/10/presidential-seal.svg
-#logoleft_name: https&#58;//www.montclair.edu/university-communications/wp-content/uploads/sites/144//2020/10/hawk-logo-color.svg
+logoleft_name: "https://www.montclair.edu/university-communications/wp-content/uploads/sites/144//2020/10/hawk-logo-color.svg"
+main_width: 0.3	
 csl: "apa7.csl"
-titlebox_height: "5%"
-poster_height: "40in"
-poster_width: "70in"
+#poster_height: "40in"
+#poster_width: "80in"
 output: 
     posterdown::posterdown_betterland:
     self_contained: false
@@ -213,7 +214,13 @@ We examined job characteristics based on O*Net's subcategories under work activi
 # Results
 The average perception that an ONet job element could be considered a resource was 3.77 with a standard deviation of 0.48 (see Figure 1), that it could be considered a challenge was 3.75 with a standard deviation of 0.50 (see Figure 2), and that it could be considered a hindrance was 2.39 with a standard deviation of 0.7 (see Figure 3).
 
-Regression analyses reveal that the more a work characteristic is perceived as a resource, the more engaged is the respondent (R2 = .15, F(7, 528) = 12.82, p < .001). The impact of challenge demands on engagement was similar in direction and magnitude to that of resources (R2 = .13, F(7, 528) = 11.03, p < .001), with null effects for both stress (R2 = .01, F(7, 528) = 0.88, p = .520) and burnout (R2 = .02, F(7, 528) = 1.21, p = .295). There was a marginal association between a work characteristic perceived as a hindrance and lower levels of engagement (R2 = .07, F(7, 528) = 5.84, p < .001), with similar effects both between being viewed as a hindrance and increased stress (R2 = .06, F(7, 528) = 4.88, p < .001) and burnout (R2 = .06, F(7, 528) = 4.90, p < .001).
+Regression analyses reveal that the more a work characteristic is perceived as a resource, the more engaged is the respondent ($R^2$ = .15, $F~(7, 528)~$ = 12.82, p < .001). The impact of challenge demands on engagement was similar in direction and magnitude to that of resources ($R^2$ = .13, F(7, 528) = 11.03, p < .001), with null effects for both stress ($R^2$ = .01, F(7, 528) = 0.88, p = .520) and burnout ($R^2$ = .02, F(7, 528) = 1.21, p = .295). There was a marginal association between a work characteristic perceived as a hindrance and lower levels of engagement ($R^2$ = .07, F(7, 528) = 5.84, p < .001), with similar effects both between being viewed as a hindrance and increased stress ($R^2$ = .06, F(7, 528) = 4.88, p < .001) and burnout ($R^2$ = .06, F(7, 528) = 4.90, p < .001).
+
+```{r HinderPlot2, fig.cap="Yaddup y'all", out.width="100%"}
+
+corrplot(new3, type="lower", order="hclust", tl.col="black", tl.srt=45, diag=FALSE)
+
+```
 
 # Discussion 
 Largely aligning with the job-demands resources theory (Demerouti et al., 2001), our results indicated that work characteristics perceived as resources were associated with greater engagement. Similarily,  characteristics perceived as challenge demands were associated with higher engagement. Further, job characteristics deemed hindrance demands were associated with lower engagement, higher stress, and greater burnout. 
