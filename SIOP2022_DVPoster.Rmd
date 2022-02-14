@@ -25,12 +25,12 @@ main_findings:
   - '![](ResourPlot.svg){.main_pic}' # main_pic is used to center align 
 #  - '![](ChallPlot.svg){.main_pic}'
 #  - '![](HinderPlot.svg){.main_pic}'
-#logoright_name: https&#58;//www.uwstout.edu/sites/default/files/styles/medium/public/2020-12/stoutlogo_quill.jpg?h=93e672f9&itok=68FWq9LN
-logoleft_name: "https://www.montclair.edu/university-communications/wp-content/uploads/sites/144//2020/10/hawk-logo-color.svg"
+logoleft_name: '![](https://www.montclair.edu/university-communications/wp-content/uploads/sites/144//2020/10/hawk-logo-color.svg){.main-img-left}'
+logoright_name: '![](https&#58;//cdn.minnesotamonthly.com/wp-content/uploads/sites/85/2019/02/Logo_UniversityofWisconsinSTOUT_RGB.png){.main-img-right}'
 main_width: 0.3	
 csl: "apa7.csl"
-#poster_height: "40in"
-#poster_width: "80in"
+poster_height: "50in"
+poster_width: "70in"
 output: 
     posterdown::posterdown_betterland:
     self_contained: false
@@ -121,7 +121,6 @@ data$onet.challenge.sc <- rowMeans(data[c(288:297)], na.rm=TRUE)
 overall.challenge <- rowMeans(data[c(288:307,309:372)], na.rm=TRUE)
 
 
-
 library(tidyverse)  
 library(corrr)
 
@@ -139,13 +138,18 @@ res.cor %>% network_plot(min_cor = .4)
 
 library(corrplot)
 
-new <- cor(data[,c(413, 411:412, 414:420)], use="complete.obs")
+new <- cor(data[,c(412:421)], use="complete.obs") ## redid 2/14/22
+
+## changing O*NET categories for prettier labels - 2/14/22
+colnames(new) <- c("Burnout", "Stress", "Engagement", "Info Input", "Mental Proc", "Work Output", "Interaction", "Interpersonal", "Physical Cond", "Structure")
+rownames(new) <- c("Burnout", "Stress", "Engagement", "Info Input", "Mental Proc", "Work Output", "Interaction", "Interpersonal", "Physical Cond", "Structure")
+
 corrplot(new, type="upper", order="hclust", tl.col="black", tl.srt=45, diag=FALSE)
 
 ## Challenge:
 
 
-mydata <- data[,c(413, 411:412, 428:434)]
+mydata <- data[,c(412:414, 428:434)]
 
 res.cor <- correlate(mydata)
 
@@ -153,11 +157,15 @@ res.cor %>% rearrange(method="MDS", absolute=FALSE) %>% shave(upper=FALSE) %>% r
 
 res.cor %>% network_plot(min_cor = .4)
 
-new2 <- cor(data[,c(413, 411:412, 428:434)], use="complete.obs")
+new2 <- cor(data[,c(412:414, 429:435)], use="complete.obs")
+
+## changing O*NET categories for prettier labels - 2/14/22
+colnames(new2) <- c("Burnout", "Stress", "Engagement", "Info Input", "Mental Proc", "Work Output", "Interaction", "Interpersonal", "Physical Cond", "Structure")
+rownames(new2) <- c("Burnout", "Stress", "Engagement", "Info Input", "Mental Proc", "Work Output", "Interaction", "Interpersonal", "Physical Cond", "Structure")
+
 corrplot(new2, type="upper", order="hclust", tl.col="black", tl.srt=45, diag=FALSE)
 
 ## Hindrance:
-
 
 mydata <- data[,c(413, 411:412, 421:427)]
 
@@ -167,7 +175,12 @@ res.cor %>% rearrange(method="MDS", absolute=FALSE) %>% shave(upper=FALSE) %>% r
 
 res.cor %>% network_plot(min_cor = .4)
 
-new3 <- cor(data[,c(413, 411:412, 421:427)], use="complete.obs")
+new3 <- cor(data[,c(412:414, 422:428)], use="complete.obs")
+
+## changing O*NET categories for prettier labels - 2/14/22
+colnames(new3) <- c("Burnout", "Stress", "Engagement", "Info Input", "Mental Proc", "Work Output", "Interaction", "Interpersonal", "Physical Cond", "Structure")
+rownames(new3) <- c("Burnout", "Stress", "Engagement", "Info Input", "Mental Proc", "Work Output", "Interaction", "Interpersonal", "Physical Cond", "Structure")
+
 corrplot(new3, type="upper", order="hclust", tl.col="black", tl.srt=45, diag=FALSE)
 
 ```
@@ -200,11 +213,11 @@ dev.off()
 # Introduction
 Research on the job demands-resources theory (Bakker & Demerouti, 2017) highlights the importance of work characteristics on the experience of motivation and strain, which in turn have an impact on job performance. We extend these perspectives to include challenge and hindrance demands. This study explores how these work experiences empirically relate to different work outcomes. We propose that:
 
-> *Hypothesis 1:* Job characteristics appraised as resources will be positively associated with engagement, and negatively associated with stress and burnout.
+> `Hypothesis 1:` Job characteristics appraised as resources will be positively associated with engagement, and negatively associated with stress and burnout.
 
-> *Hypothesis 2:* Job characteristics appraised as challenge demands will be positively associated with engagement, and negatively associated with stress and burnout.
+> `Hypothesis 2:` Job characteristics appraised as challenge demands will be positively associated with engagement, and negatively associated with stress and burnout.
 
-> *Hypothesis 3:* Job characteristics appraised as hindrance demands will be negatively associated with engagement, and positively associated with stress and burnout.
+> `Hypothesis 3:` Job characteristics appraised as hindrance demands will be negatively associated with engagement, and positively associated with stress and burnout.
 
 # Methods
 We evaluated associations between the antecedents and proximal outcomes of the Job Demands-Resources model (Bakker & Demerouti, 2017; Bakker et al., 2003; Demerouti et al., 2001), within the unifying framework of ONet. Specifically, focusing on the relationship between job characteristics and employee levels of job engagement, stress, and burnout. Jobs were classified into the International Standard Classification of Occupations (ISCO), and we further categorized these into “knowledge” (n = 320) versus “skill” (n = 214) occupations. Our sample consists of 568 Prolific Panel participants.
@@ -214,13 +227,20 @@ We examined job characteristics based on O*Net's subcategories under work activi
 # Results
 The average perception that an ONet job element could be considered a resource was 3.77 with a standard deviation of 0.48 (see Figure 1), that it could be considered a challenge was 3.75 with a standard deviation of 0.50 (see Figure 2), and that it could be considered a hindrance was 2.39 with a standard deviation of 0.7 (see Figure 3).
 
-Regression analyses reveal that the more a work characteristic is perceived as a resource, the more engaged is the respondent ($R^2$ = .15, $F~(7, 528)~$ = 12.82, p < .001). The impact of challenge demands on engagement was similar in direction and magnitude to that of resources ($R^2$ = .13, F(7, 528) = 11.03, p < .001), with null effects for both stress ($R^2$ = .01, F(7, 528) = 0.88, p = .520) and burnout ($R^2$ = .02, F(7, 528) = 1.21, p = .295). There was a marginal association between a work characteristic perceived as a hindrance and lower levels of engagement ($R^2$ = .07, F(7, 528) = 5.84, p < .001), with similar effects both between being viewed as a hindrance and increased stress ($R^2$ = .06, F(7, 528) = 4.88, p < .001) and burnout ($R^2$ = .06, F(7, 528) = 4.90, p < .001).
+Regression analyses reveal that the more a work characteristic is perceived as a resource, the more engaged is the respondent ($R^2$ = .15, $F_{(7, 528)}$ = 12.82, $p$ < .001). The impact of challenge demands on engagement was similar in direction and magnitude to that of resources ($R^2$ = .13, $F_{(7, 528)}$ = 11.03, $p$ < .001), with null effects for both stress ($R^2$= .01, $F_{(7, 528)}$ = 0.88, $p$ = .520) and burnout ($R^2$ = .02, $F_{(7, 528)}$ = 1.21, $p$ = .295). There was a marginal association between a work characteristic perceived as a hindrance and lower levels of engagement ($R^2$ = .07, $F_{(7, 528)}$ = 5.84, $p$ < .001), with similar effects both between being viewed as a hindrance and increased stress ($R^2$ = .06, $F_{(7, 528)}$ = 4.88, $p$ < .001) and burnout ($R^2$ = .06, $F_{(7, 528)}$ = 4.90, $p$ < .001).
 
-```{r HinderPlot2, fig.cap="Yaddup y'all", out.width="100%"}
+```{r ChallengePlot2, fig.cap="Challenge demand ratings (O*NET characteristic category association).", out.width="100%"}
+
+corrplot(new2, type="lower", order="hclust", tl.col="black", tl.srt=45, diag=FALSE)
+
+```
+
+```{r HinderPlot2, fig.cap="Hindrance demand ratings (O*NET characteristic category association).", out.width="100%"}
 
 corrplot(new3, type="lower", order="hclust", tl.col="black", tl.srt=45, diag=FALSE)
 
 ```
+
 
 # Discussion 
 Largely aligning with the job-demands resources theory (Demerouti et al., 2001), our results indicated that work characteristics perceived as resources were associated with greater engagement. Similarily,  characteristics perceived as challenge demands were associated with higher engagement. Further, job characteristics deemed hindrance demands were associated with lower engagement, higher stress, and greater burnout. 
