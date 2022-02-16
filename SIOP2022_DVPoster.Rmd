@@ -276,7 +276,7 @@ Regression analyses reveal that the more a work characteristic is perceived as a
 corrplot(new2, type="lower", order="hclust", tl.col="black", tl.srt=45, diag=FALSE)
 
 ```
-**Figure 2.** *Challenge demand ratings (ONet characteristic category association).*
+**Figure 2.** *Challenge demand ratings (O\*Net characteristic category association).*
 
 ```{r HinderPlot2, out.width="100%"}
 
@@ -284,7 +284,7 @@ corrplot(new3, type="lower", order="hclust", tl.col="black", tl.srt=45, diag=FAL
 
 ```
 
-**Figure 3.** *Hindrance demand ratings (ONet characteristic category association).*
+**Figure 3.** *Hindrance demand ratings (O\*Net characteristic category association).*
 
 # Discussion 
 Largely aligning with the job-demands resources theory [@demerouti2001job], our results indicated that work characteristics perceived as resources were associated with greater engagement. Similarily,  characteristics perceived as challenge demands were associated with higher engagement. Further, job characteristics deemed hindrance demands were associated with lower engagement, higher stress, and greater burnout. 
