@@ -31,7 +31,7 @@ main_findings:
 #  - '![](ChallPlot.svg){.main_pic}'
 #  - '![](HinderPlot.svg){.main_pic}'
 logoleft_name: '![](https://www.montclair.edu/university-communications/wp-content/uploads/sites/144//2020/10/hawk-logo-color.svg){.main-img-left}'
-logoright_name: '![](https&#58;//cdn.minnesotamonthly.com/wp-content/uploads/sites/85/2019/02/Logo_UniversityofWisconsinSTOUT_RGB.png){.main-img-right}'
+logoright_name: '![](Quill_White.png){.main-img-right}'
 main_width: 0.3	
 csl: "apa7.csl"
 poster_height: "50in"
@@ -228,7 +228,7 @@ Research on the job demands-resources theory [@bakker2017job] highlights the imp
 > **`Hypothesis 3:`** Job characteristics appraised as hindrance demands will be negatively associated with engagement, and positively associated with stress and burnout.
 
 # Methods
-We evaluated associations between the antecedents and proximal outcomes of the Job Demands-Resources model [@bakker2017job; @bakker2003dual; @demerouti2001job], within the unifying framework of O\*Net. Specifically, focusing on the relationship between job characteristics and employee levels of job engagement, stress, and burnout. Jobs were classified into the International Standard Classification of Occupations (ISCO), and we further categorized these into “knowledge” (n = 320) versus “skill” (n = 214) occupations. Our sample consists of 568 Prolific Panel participants.
+We evaluated associations between the antecedents and proximal outcomes of the Job Demands-Resources model [@bakker2017job; @bakker2003dual; @demerouti2001job], within the unifying framework of O\*Net. Specifically, focusing on the relationship between job characteristics and employee levels of job engagement, stress, and burnout. Our sample consists of 568 Prolific Panel participants.
 
 We examined job characteristics based on O\*Net's subcategories under work activity and work context. Burnout ($\alpha$ = `r round(alpha.bur$total$raw_alpha, 2)`) and stress ($\alpha$ = `r round(alpha.str$total$raw_alpha, 2)`) were measured using the Copenhagen Psychosocial Questionnaire [@burr_third_2019], and an overall engagement score was measured using an 18-item measure [@engage_2022] ($\alpha$ = `r round(alpha.eng$total$raw_alpha, 2)`).
 
@@ -273,7 +273,6 @@ These results support prior research on the potential impact of challenge stress
 knitr::write_bib(c('knitr','rmarkdown','posterdown','pagedown'), 'packages.bib')
 ```
 
-# References
 
 
  
