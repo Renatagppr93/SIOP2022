@@ -34,12 +34,14 @@ logoleft_name: '![](https://www.montclair.edu/university-communications/wp-conte
 logoright_name: '![](Quill_White.png){.main-img-right}'
 main_width: 0.3	
 csl: "apa7.csl"
+body_textsize: "48px"
 poster_height: "50in"
 poster_width: "70in"
 output: 
     posterdown::posterdown_betterland:
     self_contained: false
 bibliography: ["jdr.bib", "packages.bib"]
+suppress-bibliography: true 
 ---
 
 ```{r setup, include=FALSE}
@@ -230,12 +232,12 @@ Research on the job demands-resources theory [@bakker2017job] highlights the imp
 # Methods
 We evaluated associations between the antecedents and proximal outcomes of the Job Demands-Resources model [@bakker2017job; @bakker2003dual; @demerouti2001job], within the unifying framework of O\*Net. Specifically, focusing on the relationship between job characteristics and employee levels of job engagement, stress, and burnout. Our sample consists of 568 Prolific Panel participants.
 
-We examined job characteristics based on O\*Net's subcategories under work activity and work context. Burnout ($\alpha$ = `r round(alpha.bur$total$raw_alpha, 2)`) and stress ($\alpha$ = `r round(alpha.str$total$raw_alpha, 2)`) were measured using the Copenhagen Psychosocial Questionnaire [@burr_third_2019], and an overall engagement score was measured using an 18-item measure [@engage_2022] ($\alpha$ = `r round(alpha.eng$total$raw_alpha, 2)`).
+We examined job characteristics based on O\*Net's subcategories under work activity and work context. Burnout ($\alpha$ = `r round(alpha.bur$total$raw_alpha, 2)`) and stress ($\alpha$ = `r round(alpha.str$total$raw_alpha, 2)`) were measured using the Copenhagen Psychosocial Questionnaire [@burr_third_2019], and an overall engagement score was measured using an 18-item measure [@engage_2022] ($\alpha$ = `r round(alpha.eng$total$raw_alpha, 2)`). To create this poster, we used `posterdown` version `r packageVersion("posterdown")` [@R-posterdown].
 
 # Results
-We used `posterdown` version `r packageVersion("posterdown")` [@R-posterdown]. The average perception that an O\*Net job element could be considered a resource was 3.77 with a standard deviation of 0.48 (see center image), that it could be considered a challenge was 3.75 with a standard deviation of 0.50 (see Figure \@ref(fig:ChallengePlot2)), and that it could be considered a hindrance was 2.39 with a standard deviation of 0.7 (see Figure \@ref(fig:HinderPlot2)). $\leftarrow$ `is this (and the skill/knowledge stuff) from the other poster?`
+The average perception that an O\*Net job element could be considered a resource was 3.77 with a standard deviation of 0.48 (see center image), that it could be considered a challenge was 3.75 with a standard deviation of 0.50 (see Figure \@ref(fig:ChallengePlot2)), and that it could be considered a hindrance was 2.39 with a standard deviation of 0.78 (see Figure \@ref(fig:HinderPlot2)).
 
-```{r dvplot, fig.cap="Observed dependent variable distributions", out.width="100%"}
+```{r dvplot, out.width="100%"}
 
 library(ggplot2)
 library(tidyr)
@@ -244,25 +246,29 @@ forplot <- gather(data, Variable, Value, burnout:engagement, factor_key=TRUE)
 
 ggplot(forplot, aes(x = Value, fill = Variable)) +
   geom_density(alpha = .5) +
+  scale_fill_manual(values=c("#2166ac", "#d1e5f0", "#b2182b")) + 
   xlab("Dependent Variable Values") + labs(fill = "Dependent\nVariable") 
 
 ```
+**Figure 1.** *Observed dependent variable distributions*
 
 Regression analyses reveal that the more a work characteristic is perceived as a resource, the more engaged is the respondent ($R^2$ = .15, $F_{(7, 528)}$ = 12.82, $p$ < .001). The impact of challenge demands on engagement was similar in direction and magnitude to that of resources ($R^2$ = .13, $F_{(7, 528)}$ = 11.03, $p$ < .001), with null effects for both stress ($R^2$= .01, $F_{(7, 528)}$ = 0.88, $p$ = .520) and burnout ($R^2$ = .02, $F_{(7, 528)}$ = 1.21, $p$ = .295). There was a marginal association between a work characteristic perceived as a hindrance and lower levels of engagement ($R^2$ = .07, $F_{(7, 528)}$ = 5.84, $p$ < .001), with similar effects both between being viewed as a hindrance and increased stress ($R^2$ = .06, $F_{(7, 528)}$ = 4.88, $p$ < .001) and burnout ($R^2$ = .06, $F_{(7, 528)}$ = 4.90, $p$ < .001).
 
 
-```{r ChallengePlot2, fig.cap="Challenge demand ratings (O*NET characteristic category association).", out.width="100%"}
+```{r ChallengePlot2, out.width="100%"}
 
 corrplot(new2, type="lower", order="hclust", tl.col="black", tl.srt=45, diag=FALSE)
 
 ```
+**Figure 2.** *Challenge demand ratings (ONet characteristic category association).*
 
-```{r HinderPlot2, fig.cap="Hindrance demand ratings (O*NET characteristic category association).", out.width="100%"}
+```{r HinderPlot2, out.width="100%"}
 
 corrplot(new3, type="lower", order="hclust", tl.col="black", tl.srt=45, diag=FALSE)
 
 ```
 
+**Figure 3.** *Hindrance demand ratings (ONet characteristic category association).*
 
 # Discussion 
 Largely aligning with the job-demands resources theory [@demerouti2001job], our results indicated that work characteristics perceived as resources were associated with greater engagement. Similarily,  characteristics perceived as challenge demands were associated with higher engagement. Further, job characteristics deemed hindrance demands were associated with lower engagement, higher stress, and greater burnout. 
