@@ -26,12 +26,12 @@ column_numbers: 3
 title_textsize: "105pt"         ## https://githubhelp.com/brentthorne/posterdown
 #main_picwidth: "55%"           ## https://github.com/brentthorne/posterdown/wiki/posterdown_betterland
 main_findings: 
-#  - 'Big findings here & supplement in text'
   - '![](ResourPlot.svg){.main_pic}' # main_pic is used to center align 
 #  - '![](ChallPlot.svg){.main_pic}'
 #  - '![](HinderPlot.svg){.main_pic}'
-logoleft_name: '![](https://www.montclair.edu/university-communications/wp-content/uploads/sites/144//2020/10/hawk-logo-color.svg){.main-img-left}'
-logoright_name: '![](Quill_White.png){.main-img-right}'
+logoleft_name: '![](https://www.montclair.edu/university-communications/wp-content/uploads/sites/144//2020/10/hawk-logo-color.svg){.new-img-left}'
+#logoright_name: '![](Quill_White.png){.main-img-right}'
+logoright_name: '![](Quill_White.png){.new-img-right}'
 main_width: 0.3	
 csl: "apa7.csl"
 body_textsize: "48px"
@@ -56,17 +56,33 @@ knitr::opts_chunk$set(echo = FALSE)
 }
 
 .main-img-right {
- width: 80%;
+  width: 100%;
 }
 
-.top_pic {
-  width: 400px;  
-  height: 150px;  
-  border: 5px solid red;  
-  background-color: lightgreen;  
-  object-fit: none;  
-  object-position: center top;
+.new-img-right {
+  position: absolute;
+  bottom: 100px;
+  right: 150px;
+  width: 1500px;           /* Play with width and height specifications if image stretches*/
+  height: 800px;
 }
+
+.new-img-left {
+  position: absolute;
+  bottom: 100px;
+  left: 100px;
+  width: 1200px;           /* Play with width and height specifications if image stretches*/
+  height: 1100px;
+}
+
+.new-img-top {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  width: 1200px;           
+  height: 100px;
+}
+
 ```
 
 ```{r data, include = FALSE}
@@ -279,6 +295,11 @@ These results support prior research on the potential impact of challenge stress
 knitr::write_bib(c('knitr','rmarkdown','posterdown','pagedown'), 'packages.bib')
 ```
 
+```{r img-with-knitr, echo=FALSE, fig.align='center', out.width='50%'}
+
+knitr::include_graphics("https://www.siop.org/portals/84/Images/Conference/Conference%202022/Logos/2022_SIOP_Seattle_Web.png?ver=EH1uNb9JIQvpJ8v6vBO5uA%3d%3d")
+
+```
 
 
  
