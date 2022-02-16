@@ -17,6 +17,7 @@ affiliation:
 primary_colour: "#640d14"      ## https://coolors.co/250902-38040e-640d14-800e13-ad2831
 secondary_colour: "#ad2831"
 accent_colour: "#38040e"
+sectitle_bgcol: "#640d14"
 authorextra_textsize: "70px"
 affiliation_textsize: "50px"
 reference_textsize: "40px"
@@ -50,6 +51,10 @@ knitr::opts_chunk$set(echo = FALSE)
   border-radius: 50%;
   width: 90%;
   vertical-align: top;
+}
+
+.main-img-right {
+ width: 80%;
 }
 
 .top_pic {
@@ -189,7 +194,6 @@ corrplot(new3, type="upper", order="hclust", tl.col="black", tl.srt=45, diag=FAL
 
 ```
 
-
 ```{r ResourPlot, include = FALSE}
 
 svg("ResourPlot.svg")
@@ -231,7 +235,21 @@ We examined job characteristics based on O\*Net's subcategories under work activ
 # Results
 We used `posterdown` version `r packageVersion("posterdown")` [@R-posterdown]. The average perception that an O\*Net job element could be considered a resource was 3.77 with a standard deviation of 0.48 (see center image), that it could be considered a challenge was 3.75 with a standard deviation of 0.50 (see Figure \@ref(fig:ChallengePlot2)), and that it could be considered a hindrance was 2.39 with a standard deviation of 0.7 (see Figure \@ref(fig:HinderPlot2)). $\leftarrow$ `is this (and the skill/knowledge stuff) from the other poster?`
 
+```{r dvplot, fig.cap="Observed dependent variable distributions", out.width="100%"}
+
+library(ggplot2)
+library(tidyr)
+
+forplot <- gather(data, Variable, Value, burnout:engagement, factor_key=TRUE)
+
+ggplot(forplot, aes(x = Value, fill = Variable)) +
+  geom_density(alpha = .5) +
+  xlab("Dependent Variable Values") + labs(fill = "Dependent\nVariable") 
+
+```
+
 Regression analyses reveal that the more a work characteristic is perceived as a resource, the more engaged is the respondent ($R^2$ = .15, $F_{(7, 528)}$ = 12.82, $p$ < .001). The impact of challenge demands on engagement was similar in direction and magnitude to that of resources ($R^2$ = .13, $F_{(7, 528)}$ = 11.03, $p$ < .001), with null effects for both stress ($R^2$= .01, $F_{(7, 528)}$ = 0.88, $p$ = .520) and burnout ($R^2$ = .02, $F_{(7, 528)}$ = 1.21, $p$ = .295). There was a marginal association between a work characteristic perceived as a hindrance and lower levels of engagement ($R^2$ = .07, $F_{(7, 528)}$ = 5.84, $p$ < .001), with similar effects both between being viewed as a hindrance and increased stress ($R^2$ = .06, $F_{(7, 528)}$ = 4.88, $p$ < .001) and burnout ($R^2$ = .06, $F_{(7, 528)}$ = 4.90, $p$ < .001).
+
 
 ```{r ChallengePlot2, fig.cap="Challenge demand ratings (O*NET characteristic category association).", out.width="100%"}
 
