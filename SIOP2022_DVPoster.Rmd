@@ -251,7 +251,7 @@ We evaluated associations between the antecedents and proximal outcomes of the J
 We examined job characteristics based on O\*Net's subcategories under work activity and work context. Burnout ($\alpha$ = `r round(alpha.bur$total$raw_alpha, 2)`) and stress ($\alpha$ = `r round(alpha.str$total$raw_alpha, 2)`) were measured using the Copenhagen Psychosocial Questionnaire [@burr_third_2019], and an overall engagement score was measured using an 18-item measure [@engage_2022] ($\alpha$ = `r round(alpha.eng$total$raw_alpha, 2)`). To create this poster, we used `posterdown` version `r packageVersion("posterdown")` [@R-posterdown].
 
 # Results
-The average perception that an O\*Net job element could be considered a resource was 3.77 with a standard deviation of 0.48 (see center image), that it could be considered a challenge was 3.75 with a standard deviation of 0.50 (see Figure 2), and that it could be considered a hindrance was 2.39 with a standard deviation of 0.78 (see Figure 3).
+The average perception that an O\*Net job element could be considered a resource was 3.77 with a standard deviation of 0.48. That it could be considered a challenge was 3.75 with a standard deviation of 0.50. Lastly, the average perception that it could be considered a hindrance was 2.39 with a standard deviation of 0.78.
 
 ```{r dvplot, out.width="100%"}
 
@@ -266,9 +266,9 @@ ggplot(forplot, aes(x = Value, fill = Variable)) +
   xlab("Dependent Variable Values") + labs(fill = "Dependent\nVariable") 
 
 ```
-**Figure 1.** *Observed dependent variable distributions*
+**Figure 1.** *Distributions of focal variables of interest*
 
-Regression analyses reveal that the more a work characteristic is perceived as a resource, the more engaged is the respondent ($R^2$ = .15, $F_{(7, 528)}$ = 12.82, $p$ < .001). The impact of challenge demands on engagement was similar in direction and magnitude to that of resources ($R^2$ = .13, $F_{(7, 528)}$ = 11.03, $p$ < .001), with null effects for both stress ($R^2$= .01, $F_{(7, 528)}$ = 0.88, $p$ = .520) and burnout ($R^2$ = .02, $F_{(7, 528)}$ = 1.21, $p$ = .295). There was a marginal association between a work characteristic perceived as a hindrance and lower levels of engagement ($R^2$ = .07, $F_{(7, 528)}$ = 5.84, $p$ < .001), with similar effects both between being viewed as a hindrance and increased stress ($R^2$ = .06, $F_{(7, 528)}$ = 4.88, $p$ < .001) and burnout ($R^2$ = .06, $F_{(7, 528)}$ = 4.90, $p$ < .001).
+The figure in the center shows the relationships among resource dimensions (O*Net categories) as well as the three focal outcome variables. Regression analyses reveal that the more a work characteristic is perceived as a resource, the more engaged is the respondent ($R^2$ = .15, $F_{(7, 528)}$ = 12.82, $p$ < .001). Figure 2 shows the relationships among challenge demands and the three focal outcome variables. The impact of challenge demands on engagement was similar in direction and magnitude to that of resources ($R^2$ = .13, $F_{(7, 528)}$ = 11.03, $p$ < .001), with null effects for both stress ($R^2$= .01, $F_{(7, 528)}$ = 0.88, $p$ = .520) and burnout ($R^2$ = .02, $F_{(7, 528)}$ = 1.21, $p$ = .295). Figure 3 shows the relationships among hindrance demands and the three focal outcome variables. Regression analyses revealed a marginal association between a work characteristic perceived as a hindrance and lower levels of engagement ($R^2$ = .07, $F_{(7, 528)}$ = 5.84, $p$ < .001), with similar effects both between being viewed as a hindrance and increased stress ($R^2$ = .06, $F_{(7, 528)}$ = 4.88, $p$ < .001) and burnout ($R^2$ = .06, $F_{(7, 528)}$ = 4.90, $p$ < .001).
 
 
 ```{r ChallengePlot2, out.width="100%"}
@@ -297,11 +297,8 @@ Future study could explore job characteristics at a more granular/individual lev
 knitr::write_bib(c('knitr','rmarkdown','posterdown','pagedown'), 'packages.bib')
 ```
 
-```{r img-with-knitr, echo=FALSE, fig.align='center', out.width='50%'}
+```{r img-with-knitr, echo=FALSE, fig.align='right', out.width='25%'}
 
-knitr::include_graphics("https://www.siop.org/portals/84/Images/Conference/Conference%202022/Logos/2022_SIOP_Seattle_Web.png?ver=EH1uNb9JIQvpJ8v6vBO5uA%3d%3d")
+knitr::include_graphics("2022_SIOP_Seattle_Web.png")
 
 ```
-
-
- 
