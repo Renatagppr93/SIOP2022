@@ -14,11 +14,11 @@ affiliation:
   - num: 2
     address: University of Wisonsin-Stout
 primary_colour: "#640d14"      ## https://coolors.co/250902-38040e-640d14-800e13-ad2831
-secondary_colour: "#ad2831"
+secondary_colour: "#FDFEFF"
 accent_colour: "#38040e"
 column_numbers: 3
 body_textsize: "50px"
-logoright_name: https&#58;//raw.githubusercontent.com/brentthorne/posterdown/master/images/betterhexlogo.png
+logoright_name: 'Quill_White.png'
 logoleft_name: https&#58;//www.montclair.edu/university-communications/wp-content/uploads/sites/144//2020/10/hawk-logo-color.svg
 output: 
   posterdown::posterdown_html:
@@ -28,6 +28,29 @@ bibliography: packages.bib
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{css, echo=FALSE}
+
+/*                         https://www.w3schools.com/css/css3_images.asp                  */
+
+.logo_left {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 550px;         
+  height: 540px;
+}
+
+
+.logo_right {
+  position: absolute;
+  top: 0px;
+  left: 3250px;
+  width: 1000px;          
+  height: 540px;
+}
+
 ```
 
 # Introduction
