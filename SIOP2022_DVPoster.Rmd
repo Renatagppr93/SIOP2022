@@ -251,7 +251,7 @@ We evaluated associations between the antecedents and proximal outcomes of the J
 We examined job characteristics based on O\*Net's subcategories under work activity and work context. Burnout ($\alpha$ = `r round(alpha.bur$total$raw_alpha, 2)`) and stress ($\alpha$ = `r round(alpha.str$total$raw_alpha, 2)`) were measured using the Copenhagen Psychosocial Questionnaire [@burr_third_2019], and an overall engagement score was measured using an 18-item measure [@engage_2022] ($\alpha$ = `r round(alpha.eng$total$raw_alpha, 2)`). To create this poster, we used `posterdown` version `r packageVersion("posterdown")` [@R-posterdown].
 
 # Results
-The average perception that an O\*Net job element could be considered a resource was 3.77 with a standard deviation of 0.48 (see center image), that it could be considered a challenge was 3.75 with a standard deviation of 0.50 (see Figure \@ref(fig:ChallengePlot2)), and that it could be considered a hindrance was 2.39 with a standard deviation of 0.78 (see Figure \@ref(fig:HinderPlot2)).
+The average perception that an O\*Net job element could be considered a resource was 3.77 with a standard deviation of 0.48 (see center image), that it could be considered a challenge was 3.75 with a standard deviation of 0.50 (see Figure 2), and that it could be considered a hindrance was 2.39 with a standard deviation of 0.78 (see Figure 3).
 
 ```{r dvplot, out.width="100%"}
 
@@ -279,7 +279,7 @@ corrplot(new2, type="lower", order="hclust", tl.col="black", tl.srt=45, diag=FAL
 **Figure 2.** *Challenge demand ratings (O\*Net characteristic category association).*
 
 ```{r HinderPlot2, out.width="100%"}
-
+ 
 corrplot(new3, type="lower", order="hclust", tl.col="black", tl.srt=45, diag=FALSE)
 
 ```
