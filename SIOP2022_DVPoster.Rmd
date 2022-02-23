@@ -39,7 +39,7 @@ poster_height: "50in"
 poster_width: "70in"
 output: 
     posterdown::posterdown_betterland:
-    self_contained: false
+    self_contained: true
 bibliography: ["jdr.bib", "packages.bib"]
 suppress-bibliography: true 
 ---
@@ -291,9 +291,7 @@ Largely aligning with the job-demands resources theory [@demerouti2001job], our 
 
 These results support prior research on the potential impact of challenge stressors on work outcomes [@cavanaugh2000empirical; @podsakoff2007differential]. Our results highlight the importance in noting the distinction between types of demands in future research and practice. Employers would benefit from understanding what work demands may be perceived as challenges, and leveraging them to increase desired work outcomes (e.g., engagement). 
 
-Future study could explore job characteristics at a more granular/individual level. Next, our study was limited to three outcomes of interest. A fruitful direction for future study would be consideration of additional outcomes (e.g., job satisfaction) as well. It would also be of interest to consider moderators of these relationships (e.g., industry type, personality). 
-
-```{r img-with-knitr, echo=FALSE, fig.align='right', out.width='25%', eval=FALSE}
+```{r img-with-knitr, echo=FALSE, fig.align='right', out.width='45%', eval=TRUE}
 
 knitr::include_graphics("2022_SIOP_Seattle_Web.png")
 
