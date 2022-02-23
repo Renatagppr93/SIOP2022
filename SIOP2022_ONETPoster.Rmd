@@ -6,7 +6,7 @@ author:
     orcid: '0000-0002-1099-3857'
   - name:  Dr. Alicia Stachowski
     affil: 2
-  - name: Dr. John Kulas
+  - name: John Kulas
     affil: 1
 affiliation:
   - num: 1
@@ -23,8 +23,8 @@ logoright_name: 'Quill_White.png'
 logoleft_name: https&#58;//www.montclair.edu/university-communications/wp-content/uploads/sites/144//2020/10/hawk-logo-color.svg
 output: 
   posterdown::posterdown_html:
-    self_contained: TRUE
-knit: pagedown::chrome_print
+    self_contained: true           
+#knit: pagedown::chrome_print
 bibliography: ["jdr.bib", "packages.bib"]
 suppress-bibliography: true
 ---
@@ -1876,59 +1876,17 @@ tophindrance <- tophindrance[tail(names(tophindrance),3)]
 bottomhindrance <- bottomhindrance[tail(names(bottomhindrance),3)]  
 library(ggplot2)
 
-
-
+#library(stringr)
+#tophindrance$description <- str_wrap(tophindrance$description, #width = 15)
 
 hindrance.overall.t <- ggplot(tophindrance, aes(x=reorder(description,mean), y=mean)) +
   geom_bar(stat="identity", color="red", position=position_dodge()) + theme_bw() +
-  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + 
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 40, simplify = FALSE), paste, collapse="\n")) + 
   xlab("") + ylab("Overall") + 
-  geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) +
-  coord_flip(ylim=c(3,5)) +
-  theme(axis.text = element_text(size = 13), axis.title = element_text(size = 20), legend.title = element_text(size = 20), legend.text = element_text(size = 15))
+  geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.5, size=2, position=position_dodge(.9)) +
+  coord_flip(ylim=c(1,5)) +
+  theme(axis.text = element_text(size = 20), axis.title = element_text(size = 20))
 
-
-
-
-hindrance.overall.b <- ggplot(bottomhindrance, aes(x=reorder(description,-mean), y=mean)) + geom_bar(stat="identity", color="red", position=position_dodge()) + theme_bw() +
-  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Overall") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
-
-
-
-
-
-#### Service
-hindrance <- as.data.frame(t(service[203:287]))           
-hindrance$description <- labels[c(203:287),1]
-hindrance$mean <- round(rowMeans(hindrance[1:nrow(service)], na.rm=TRUE),2)
-hindrance$sd   <- round(apply(hindrance[1:nrow(service)], 1, sd, na.rm=TRUE),2)
-hindrance <- hindrance[ which(hindrance$sd > 0), ]        
-hindrance <- hindrance[,-248]   ## attention check
-sorthindrance <- hindrance[order(-hindrance$mean),]
-tophindrance <- head(sorthindrance, 10)
-bottomhindrance <- tail(sorthindrance,10)
-tophindrance <- tophindrance[tail(names(tophindrance),3)]        
-bottomhindrance <- bottomhindrance[tail(names(bottomhindrance),3)]  
-hindrance.service.t <- ggplot(tophindrance, aes(x=reorder(description,mean), y=mean)) + geom_bar(stat="identity", color="red", position=position_dodge()) + theme_bw() +
-  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Skill") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5)) 
-hindrance.service.b <- ggplot(bottomhindrance, aes(x=reorder(description,-mean), y=mean)) + geom_bar(stat="identity", color="red", position=position_dodge()) + theme_bw() +
-  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Skill") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
-## Knowledge
-hindrance <- as.data.frame(t(knowledge[203:287]))           
-hindrance$description <- labels[c(203:287),1]
-hindrance$mean <- round(rowMeans(hindrance[1:nrow(knowledge)], na.rm=TRUE),2)
-hindrance$sd   <- round(apply(hindrance[1:nrow(knowledge)], 1, sd, na.rm=TRUE),2)
-hindrance <- hindrance[ which(hindrance$sd > 0), ]        
-hindrance <- hindrance[,-248]   ## attention check
-sorthindrance <- hindrance[order(-hindrance$mean),]
-tophindrance <- head(sorthindrance, 10)
-bottomhindrance <- tail(sorthindrance,10)
-tophindrance <- tophindrance[tail(names(tophindrance),3)]        
-bottomhindrance <- bottomhindrance[tail(names(bottomhindrance),3)]  
-hindrance.knowledge.t <- ggplot(tophindrance, aes(x=reorder(description,mean), y=mean)) + geom_bar(stat="identity", color="red", position=position_dodge()) + theme_bw() +
-  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Knowledge") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
-hindrance.knowledge.b <- ggplot(bottomhindrance, aes(x=reorder(description,-mean), y=mean)) + geom_bar(stat="identity", color="red", position=position_dodge()) + theme_bw() +
-  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Knowledge") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5)) 
 ```
 
 ```{r figure3, fig.width=14, fig.height=6}
