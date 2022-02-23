@@ -1761,46 +1761,14 @@ bottomresource <- tail(sortresource,10)
 topresource <- topresource[tail(names(topresource),3)]        
 bottomresource <- bottomresource[tail(names(bottomresource),3)]  
 library(ggplot2)
-resource.overall.t <- ggplot(topresource, aes(x=reorder(description,mean), y=mean)) + geom_bar(stat="identity", color="blue", position=position_dodge()) + theme_bw() +
-  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Overall") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,6)) 
 
-resource.overall.b <- ggplot(bottomresource, aes(x=reorder(description,-mean), y=mean)) + geom_bar(stat="identity", color="blue", position=position_dodge()) + theme_bw() +
-  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Overall") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
-#### Service
-resource <- as.data.frame(t(service[118:202]))           
-resource$description <- labels[c(118:202),1]
-resource$mean <- round(rowMeans(resource[1:nrow(service)], na.rm=TRUE),2)
-resource$sd   <- round(apply(resource[1:nrow(service)], 1, sd, na.rm=TRUE),2)
-resource <- resource[ which(resource$sd > 0), ]        
-resource <- resource[,-145]   ## attention check
-sortresource <- resource[order(-resource$mean),]
-topresource <- head(sortresource, 10)
-bottomresource <- tail(sortresource,10)
-topresource <- topresource[tail(names(topresource),3)]        
-bottomresource <- bottomresource[tail(names(bottomresource),3)]  
-resource.service.t <- ggplot(topresource, aes(x=reorder(description,mean), y=mean)) + geom_bar(stat="identity", color="blue", position=position_dodge()) + theme_bw() +
-  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Skill") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,6))
-resource.service.b <- ggplot(bottomresource, aes(x=reorder(description,-mean), y=mean)) + geom_bar(stat="identity", color="blue", position=position_dodge()) + theme_bw() +
-  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Skill") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
-## Knowledge
-resource <- as.data.frame(t(knowledge[118:202]))           
-resource$description <- labels[c(118:202),1]
-resource$mean <- round(rowMeans(resource[1:nrow(knowledge)], na.rm=TRUE),2)
-resource$sd   <- round(apply(resource[1:nrow(knowledge)], 1, sd, na.rm=TRUE),2)
-resource <- resource[ which(resource$sd > 0), ]        
-resource <- resource[,-145]   ## attention check
-sortresource <- resource[order(-resource$mean),]
-topresource <- head(sortresource, 10)
-bottomresource <- tail(sortresource,10)
-topresource <- topresource[tail(names(topresource),3)]        
-bottomresource <- bottomresource[tail(names(bottomresource),3)]  
-resource.knowledge.t <- ggplot(topresource, aes(x=reorder(description,mean), y=mean)) + geom_bar(stat="identity", color="blue", position=position_dodge()) + theme_bw() +
-  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Knowledge") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,6))
-resource.knowledge.b <- ggplot(bottomresource, aes(x=reorder(description,-mean), y=mean)) + geom_bar(stat="identity", color="blue", position=position_dodge()) + theme_bw() +
-  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Knowledge") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
+resource.overall.t <- ggplot(topresource, aes(x=reorder(description,mean), y=mean)) + geom_bar(stat="identity", color="blue", position=position_dodge()) + theme_bw() +
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 40, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Overall") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.5, size=2, position=position_dodge(.9)) + coord_flip(ylim=c(2,6)) +
+  theme(axis.text = element_text(size = 20), axis.title = element_text(size = 20))
+
 ```
 
-```{r figure1, fig.width=14, fig.height=6}
+```{r figure1, fig.width=14, fig.height=10}
 resource.overall.t
 ```
 Figure 1. Overall Top 10 Resources
@@ -1818,42 +1786,11 @@ bottomchallenge <- tail(sortchallenge,10)
 topchallenge <- topchallenge[tail(names(topchallenge),3)]        
 bottomchallenge <- bottomchallenge[tail(names(bottomchallenge),3)]  
 library(ggplot2)
+
 challenge.overall.t <- ggplot(topchallenge, aes(x=reorder(description,mean), y=mean)) + geom_bar(stat="identity", color="orange", position=position_dodge()) + theme_bw() +
-  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Overall") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,6)) 
-challenge.overall.b <- ggplot(bottomchallenge, aes(x=reorder(description,-mean), y=mean)) + geom_bar(stat="identity", color="orange", position=position_dodge()) + theme_bw() +
-  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Overall") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
-#### Service
-challenge <- as.data.frame(t(service[288:372]))           
-challenge$description <- labels[c(288:372),1]
-challenge$mean <- round(rowMeans(challenge[1:nrow(service)], na.rm=TRUE),2)
-challenge$sd   <- round(apply(challenge[1:nrow(service)], 1, sd, na.rm=TRUE),2)
-challenge <- challenge[ which(challenge$sd > 0), ]        
-challenge <- challenge[,-308]   ## attention check
-sortchallenge <- challenge[order(-challenge$mean),]
-topchallenge <- head(sortchallenge, 10)
-bottomchallenge <- tail(sortchallenge,10)
-topchallenge <- topchallenge[tail(names(topchallenge),3)]        
-bottomchallenge <- bottomchallenge[tail(names(bottomchallenge),3)]  
-challenge.service.t <- ggplot(topchallenge, aes(x=reorder(description,mean), y=mean)) + geom_bar(stat="identity", color="orange", position=position_dodge()) + theme_bw() +
-  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Skill") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,6))
-challenge.service.b <- ggplot(bottomchallenge, aes(x=reorder(description,-mean), y=mean)) + geom_bar(stat="identity", color="orange", position=position_dodge()) + theme_bw() +
-  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Skill") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
-## Knowledge
-challenge <- as.data.frame(t(knowledge[288:372]))           
-challenge$description <- labels[c(288:372),1]
-challenge$mean <- round(rowMeans(challenge[1:nrow(knowledge)], na.rm=TRUE),2)
-challenge$sd   <- round(apply(challenge[1:nrow(knowledge)], 1, sd, na.rm=TRUE),2)
-challenge <- challenge[ which(challenge$sd > 0), ]        
-challenge <- challenge[,-308]   ## attention check
-sortchallenge <- challenge[order(-challenge$mean),]
-topchallenge <- head(sortchallenge, 10)
-bottomchallenge <- tail(sortchallenge,10)
-topchallenge <- topchallenge[tail(names(topchallenge),3)]        
-bottomchallenge <- bottomchallenge[tail(names(bottomchallenge),3)]  
-challenge.knowledge.t <- ggplot(topchallenge, aes(x=reorder(description,mean), y=mean)) + geom_bar(stat="identity", color="orange", position=position_dodge()) + theme_bw() +
-  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Knowledge") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,6))
-challenge.knowledge.b <- ggplot(bottomchallenge, aes(x=reorder(description,-mean), y=mean)) + geom_bar(stat="identity", color="orange", position=position_dodge()) + theme_bw() +
-  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Knowledge") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
+  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 40, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Overall") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.5, size=2, position=position_dodge(.9)) + coord_flip(ylim=c(2,6)) +
+  theme(axis.text = element_text(size = 20), axis.title = element_text(size = 20))
+
 ```
 
 ```{r figure2, fig.width=14, fig.height=6}
@@ -1893,6 +1830,7 @@ hindrance.overall.t <- ggplot(tophindrance, aes(x=reorder(description,mean), y=m
 hindrance.overall.t
 ```
 Figure 3. Overall Top 10 Hindrance Demands
+
 ```{r resources_variability, eval=TRUE}
 labels <- read.csv("truncatedlabels.csv")            
 resource <- as.data.frame(t(data[118:202]))           
@@ -1929,134 +1867,6 @@ topresourceplot$Skill <- round(topresourceplot$Skill,2)
 topresourceplot <- topresourceplot[order(-abs(topresourceplot$t)),]
 
 ```
-
-```{r hindrances_variability, eval=FALSE}
-labels <- read.csv("truncatedlabels.csv")            
-hindrance <- as.data.frame(t(data[203:287]))           
-hindrance$description <- labels[c(203:287),1]
-hindrance$overallmean <- round(rowMeans(hindrance[1:nrow(data)], na.rm=TRUE),2)
-hindrance$sd   <- round(apply(hindrance[1:nrow(data)], 1, sd, na.rm=TRUE),2)
-hindrance <- hindrance[,-248]   ## attention check
-sorthindrance <- hindrance[order(-hindrance$sd),]
-tophindrance <- head(sorthindrance, 10)
-tophindrance <- tophindrance[tail(names(tophindrance),3)]        
- 
-data$worker[m3$iscoGroup == "1" | m3$iscoGroup == "2"] <- "Knowledge"
-data$worker[m3$iscoGroup == "3" | m3$iscoGroup == "4" | m3$iscoGroup == "5" | m3$iscoGroup == "6" | m3$iscoGroup == "7" | m3$iscoGroup == "8" | m3$iscoGroup == "9"] <- "Skill"
-t1 <- t.test(item206~worker,data)
-t2 <- t.test(item203~worker,data)
-t3 <- t.test(item284~worker,data)
-t4 <- t.test(item230~worker,data)
-t5 <- t.test(item239~worker,data)
-t6 <- t.test(item281~worker,data)
-t7 <- t.test(item267~worker,data)
-t8 <- t.test(item218~worker,data)
-t9 <- t.test(item236~worker,data)
-t10 <- t.test(item261~worker,data)
-t <- rbind(t1$statistic,t2$statistic,t3$statistic,t4$statistic,t5$statistic,t6$statistic,t7$statistic,t8$statistic,t9$statistic,t10$statistic)
-p <- rbind(t1$p.value,t2$p.value,t3$p.value,t4$p.value,t5$p.value,t6$p.value,t7$p.value,t8$p.value,t9$p.value,t10$p.value)
-Knowledge <- rbind(t1$estimate[[1]],t2$estimate[[1]],t3$estimate[[1]],t4$estimate[[1]],t5$estimate[[1]],t6$estimate[[1]],t7$estimate[[1]],t8$estimate[[1]],t9$estimate[[1]],t10$estimate[[1]])
-Skill <- rbind(t1$estimate[[2]],t2$estimate[[2]],t3$estimate[[2]],t4$estimate[[2]],t5$estimate[[2]],t6$estimate[[2]],t7$estimate[[2]],t8$estimate[[2]],t9$estimate[[2]],t10$estimate[[2]])
-write.csv(tophindrance, "tophindrance.csv")
-tophindrance <- read.csv("tophindrance.csv")[2:4]
-tophindranceplot <- cbind(tophindrance,t,p,Knowledge,Skill)
-tophindranceplot$p <- round(tophindranceplot$p,3)
-tophindranceplot$Knowledge <- round(tophindranceplot$Knowledge,2)
-tophindranceplot$Skill <- round(tophindranceplot$Skill,2)
-tophindranceplot <- tophindranceplot[order(-abs(tophindranceplot$t)),]
-
-```
-
-```{r challenges_variability, eval=FALSE}
-labels <- read.csv("truncatedlabels.csv")            
-challenge <- as.data.frame(t(data[288:372]))           
-challenge$description <- labels[c(288:372),1]
-challenge$overallmean <- round(rowMeans(challenge[1:nrow(data)], na.rm=TRUE),2)
-challenge$sd   <- round(apply(challenge[1:nrow(data)], 1, sd, na.rm=TRUE),2)
-challenge <- challenge[,-308]   ## attention check
-sortchallenge <- challenge[order(-challenge$sd),]
-topchallenge <- head(sortchallenge, 10)
-topchallenge <- topchallenge[tail(names(topchallenge),3)]        
- 
-data$worker[m3$iscoGroup == "1" | m3$iscoGroup == "2"] <- "Knowledge"
-data$worker[m3$iscoGroup == "3" | m3$iscoGroup == "4" | m3$iscoGroup == "5" | m3$iscoGroup == "6" | m3$iscoGroup == "7" | m3$iscoGroup == "8" | m3$iscoGroup == "9"] <- "Skill"
-t1 <- t.test(item306~worker,data)
-t2 <- t.test(item298~worker,data)
-t3 <- t.test(item316~worker,data)
-t4 <- t.test(item318~worker,data)
-t5 <- t.test(item311~worker,data)
-t6 <- t.test(item310~worker,data)
-t7 <- t.test(item352~worker,data)
-t8 <- t.test(item317~worker,data)
-t9 <- t.test(item322~worker,data)
-t10 <- t.test(item294~worker,data)
-t <- rbind(t1$statistic,t2$statistic,t3$statistic,t4$statistic,t5$statistic,t6$statistic,t7$statistic,t8$statistic,t9$statistic,t10$statistic)
-p <- rbind(t1$p.value,t2$p.value,t3$p.value,t4$p.value,t5$p.value,t6$p.value,t7$p.value,t8$p.value,t9$p.value,t10$p.value)
-Knowledge <- rbind(t1$estimate[[1]],t2$estimate[[1]],t3$estimate[[1]],t4$estimate[[1]],t5$estimate[[1]],t6$estimate[[1]],t7$estimate[[1]],t8$estimate[[1]],t9$estimate[[1]],t10$estimate[[1]])
-Skill <- rbind(t1$estimate[[2]],t2$estimate[[2]],t3$estimate[[2]],t4$estimate[[2]],t5$estimate[[2]],t6$estimate[[2]],t7$estimate[[2]],t8$estimate[[2]],t9$estimate[[2]],t10$estimate[[2]])
-write.csv(topchallenge, "topchallenge.csv")
-topchallenge <- read.csv("topchallenge.csv")[2:4]
-topchallengeplot <- cbind(topchallenge,t,p,Knowledge,Skill)
-topchallengeplot$p <- round(topchallengeplot$p,3)
-topchallengeplot$Knowledge <- round(topchallengeplot$Knowledge,2)
-topchallengeplot$Skill <- round(topchallengeplot$Skill,2)
-topchallengeplot <- topchallengeplot[order(-abs(topchallengeplot$t)),]
-
-```
-
-```{r resourceslowsd, eval=FALSE}
-labels <- read.csv("truncatedlabels.csv")            
-resource <- as.data.frame(t(data[118:202]))           
-resource$description <- labels[c(118:202),1]
-resource$mean <- round(rowMeans(resource[1:nrow(data)], na.rm=TRUE),2)
-resource$sd   <- round(apply(resource[1:nrow(data)], 1, sd, na.rm=TRUE),2)
-resource <- resource[,-145]   ## attention check
-resource <- resource[ which(resource$sd > 0), ] 
-sortresource <- resource[order(resource$sd),]
-topresource <- head(sortresource, 10)
-topresource <- topresource[tail(names(topresource),3)]        
-library(ggplot2)
-ggplot(topresource, aes(x=reorder(description,-sd), y=mean)) + geom_bar(stat="identity", color="black", position=position_dodge()) + theme_bw() +
-  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Resources (Agreement)") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5)) 
-```
-
-```{r challengesagree, eval=FALSE}
-labels <- read.csv("truncatedlabels.csv")            
-challenge <- as.data.frame(t(data[288:372]))           
-challenge$description <- labels[c(288:372),1]
-challenge$mean <- round(rowMeans(challenge[1:nrow(data)], na.rm=TRUE),2)
-challenge$sd   <- round(apply(challenge[1:nrow(data)], 1, sd, na.rm=TRUE),2)
-challenge <- challenge[,-308]   ## attention check
-challenge <- challenge[ which(challenge$sd > 0), ] 
-sortchallenge <- challenge[order(challenge$sd),]
-topchallenge <- head(sortchallenge, 10)
-topchallenge <- topchallenge[tail(names(topchallenge),3)]        
-library(ggplot2)
-ggplot(topchallenge, aes(x=reorder(description,-sd), y=mean)) + geom_bar(stat="identity", color="black", position=position_dodge()) + theme_bw() +
-  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Agreement (Challenges)") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5)) 
-```
-
-```{r hindrancesagree, eval=FALSE}
-labels <- read.csv("truncatedlabels.csv")            
-hindrance <- as.data.frame(t(data[203:287]))           
-hindrance$description <- labels[c(203:287),1]
-hindrance$mean <- round(rowMeans(hindrance[1:nrow(data)], na.rm=TRUE),2)
-hindrance$sd   <- round(apply(hindrance[1:nrow(data)], 1, sd, na.rm=TRUE),2)
-hindrance <- hindrance[,-248]   ## attention check
-hindrance <- hindrance[ which(hindrance$sd > 0), ] 
-sorthindrance <- hindrance[order(hindrance$sd),]
-tophindrance <- head(sorthindrance, 10)
-tophindrance <- tophindrance[tail(names(tophindrance),3)]        
-library(ggplot2)
-ggplot(tophindrance, aes(x=reorder(description,-sd), y=mean)) + 
-  geom_bar(stat="identity", color="black", position=position_dodge()) + 
-  theme_bw() +
-  scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + 
-  ylab("Agreement (Hindrances)") + 
-  geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) +     coord_flip(ylim=c(3,5)) +
-  theme(axis.text = element_text(size = 13), axis.title = element_text(size = 20), legend.title = element_text(size = 20), legend.text = element_text(size = 15))
-```
-
 
 # Discussion
 
