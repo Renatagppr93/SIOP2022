@@ -23,7 +23,8 @@ logoright_name: 'Quill_White.png'
 logoleft_name: https&#58;//www.montclair.edu/university-communications/wp-content/uploads/sites/144//2020/10/hawk-logo-color.svg
 output: 
   posterdown::posterdown_html:
-    self_contained: false
+    self_contained: TRUE
+knit: pagedown::chrome_print
 bibliography: ["jdr.bib", "packages.bib"]
 suppress-bibliography: true
 ---
