@@ -23,7 +23,8 @@ logoright_name: 'Quill_White.png'
 logoleft_name: https&#58;//www.montclair.edu/university-communications/wp-content/uploads/sites/144//2020/10/hawk-logo-color.svg
 output: 
   posterdown::posterdown_html:
-    self_contained: false
+    self_contained: TRUE
+knit: pagedown::chrome_print
 bibliography: ["jdr.bib", "packages.bib"]
 suppress-bibliography: true
 ---
@@ -1799,16 +1800,10 @@ resource.knowledge.b <- ggplot(bottomresource, aes(x=reorder(description,-mean),
   scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Knowledge") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
 ```
 
-```{r figure1, fig.width=14, fig.height=6, fig.cap="Overall Top 10 Resources"}
+```{r figure1, fig.width=14, fig.height=6}
 resource.overall.t
 ```
-
-```{r img-with-knitr, echo=FALSE, fig.align='center', out.width='50%'}
-
-knitr::include_graphics("https://www.siop.org/portals/84/Images/Conference/Conference%202022/Logos/2022_SIOP_Seattle_Web.png?ver=EH1uNb9JIQvpJ8v6vBO5uA%3d%3d")
-
-```
-
+Figure 1. Overall Top 10 Resources
 ```{r challenges}
 labels <- read.csv("truncatedlabels.csv")            
 challenge <- as.data.frame(t(data[288:372]))           
@@ -1861,10 +1856,10 @@ challenge.knowledge.b <- ggplot(bottomchallenge, aes(x=reorder(description,-mean
   scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Knowledge") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5))
 ```
 
-```{r figure2, fig.width=14, fig.height=6, fig.cap="Overall Top 10 Challenge Demands"}
+```{r figure2, fig.width=14, fig.height=6}
 challenge.overall.t
 ```
-
+Figure 2. Overall Top 10 Challenge Demands
 
 ```{r hindrances}
 labels <- read.csv("truncatedlabels.csv")            
@@ -1936,10 +1931,10 @@ hindrance.knowledge.b <- ggplot(bottomhindrance, aes(x=reorder(description,-mean
   scale_x_discrete(labels = function(x) lapply(strwrap(x, width = 60, simplify = FALSE), paste, collapse="\n")) + xlab("") + ylab("Knowledge") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) + coord_flip(ylim=c(1,5)) 
 ```
 
-```{r figure3, fig.width=14, fig.height=6, fig.cap="Overall Top 10 Hindrance Demands"}
+```{r figure3, fig.width=14, fig.height=6}
 hindrance.overall.t
 ```
-
+Figure 3. Overall Top 10 Hindrance Demands
 ```{r resources_variability, eval=TRUE}
 labels <- read.csv("truncatedlabels.csv")            
 resource <- as.data.frame(t(data[118:202]))           
@@ -2111,6 +2106,12 @@ The findings generally suggest there is greater consensus/less variability regar
 
 These findings provide support for moving away from the a priori classification of job characteristics as either demands or resources. Moreover, demands should be further deliniated as challenges or hindrances. This suggests that overcoming or managing challenge demands may serve the same purpose as a resource, such as increasing motivation and engagement with their work. The overlap between the classification of resources suggests that there might be job characteristics that universally serve as resources to varying degrees depending on the type of work. 
 
-```{r, include=FALSE}
+```{r img-with-knitr, echo=FALSE, fig.align='center', out.width='50%'}
+
+knitr::include_graphics("https://www.siop.org/portals/84/Images/Conference/Conference%202022/Logos/2022_SIOP_Seattle_Web.png?ver=EH1uNb9JIQvpJ8v6vBO5uA%3d%3d")
+
+```
+
+```{r bib, eval=FALSE}
 knitr::write_bib(c('knitr','rmarkdown','posterdown','pagedown', 'labourR'), 'packages.bib')
 ```
