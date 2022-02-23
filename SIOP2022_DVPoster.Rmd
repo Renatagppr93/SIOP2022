@@ -293,12 +293,12 @@ These results support prior research on the potential impact of challenge stress
 
 Future study could explore job characteristics at a more granular/individual level. Next, our study was limited to three outcomes of interest. A fruitful direction for future study would be consideration of additional outcomes (e.g., job satisfaction) as well. It would also be of interest to consider moderators of these relationships (e.g., industry type, personality). 
 
-```{r, include=FALSE}
-knitr::write_bib(c('knitr','rmarkdown','posterdown','pagedown'), 'packages.bib')
-```
-
-```{r img-with-knitr, echo=FALSE, fig.align='right', out.width='25%'}
+```{r img-with-knitr, echo=FALSE, fig.align='right', out.width='25%', eval=FALSE}
 
 knitr::include_graphics("2022_SIOP_Seattle_Web.png")
 
+```
+
+```{r, include=FALSE}
+knitr::write_bib(c('knitr','rmarkdown','posterdown','pagedown'), 'packages.bib')
 ```
