@@ -40,6 +40,7 @@ poster_width: "70in"
 output: 
     posterdown::posterdown_betterland:
     self_contained: true
+knit: pagedown::chrome_print
 bibliography: ["jdr.bib", "packages.bib"]
 suppress-bibliography: true 
 ---
