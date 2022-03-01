@@ -85,7 +85,7 @@ knitr::opts_chunk$set(echo = FALSE)
 }
 
 p.caption {
-  font-size: 1em;         /* This sets figure caption font size */
+  font-size: .9em;         /* This sets figure caption font size */
   text-align: left
 }
 
