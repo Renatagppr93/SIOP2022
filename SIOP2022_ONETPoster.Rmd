@@ -18,6 +18,8 @@ secondary_colour: "#ad2831"
 accent_colour: "#38040e"
 author_textcol: "#FDFEFF"
 column_numbers: 3
+poster_height: "40in"
+poster_width: "45in"
 body_textsize: "50px"
 logoright_name: 'Quill_White.png'
 logoleft_name: https&#58;//www.montclair.edu/university-communications/wp-content/uploads/sites/144//2020/10/hawk-logo-color.svg
@@ -1779,6 +1781,13 @@ resource.overall.t <- ggplot(topresource, aes(x=reorder(description,mean), y=mea
 resource.overall.t
 ```
 
+
+```{r img-with-knitr, echo=FALSE, fig.align='center', out.width='50%'}
+
+knitr::include_graphics("https://www.siop.org/portals/84/Images/Conference/Conference%202022/Logos/2022_SIOP_Seattle_Web.png?ver=EH1uNb9JIQvpJ8v6vBO5uA%3d%3d")
+
+```
+
 ```{r challenges}
 labels <- read.csv("truncatedlabels.csv")            
 challenge <- as.data.frame(t(data[288:372]))           
@@ -1800,7 +1809,7 @@ challenge.overall.t <- ggplot(topchallenge, aes(x=reorder(description,mean), y=m
 
 ```
 
-```{r figure2, fig.width=14, fig.height=7, fig.cap="Overall Top 8 Challenge Demands"}
+```{r figure2, fig.width=14, fig.height=8, fig.cap="Overall Top 8 Challenge Demands"}
 challenge.overall.t
 ```
 
@@ -1832,7 +1841,7 @@ hindrance.overall.t <- ggplot(tophindrance, aes(x=reorder(description,mean), y=m
 
 ```
 
-```{r figure3, fig.width=14, fig.height=7, fig.cap="Overall Top 8 Hindrance Demands"}
+```{r figure3, fig.width=14, fig.height=8, fig.cap="Overall Top 8 Hindrance Demands"}
 hindrance.overall.t
 ```
 
@@ -1878,12 +1887,6 @@ topresourceplot <- topresourceplot[order(-abs(topresourceplot$t)),]
 The findings generally suggest there is greater consensus/less variability regarding ratings of job characteristics deemed resources and challenge demands, but much greater variability in those characteristics rated as hindrances. There was considerable overlap in the top 10 resources that emerged from those classified as knowledge and skill workers. 
 
 These findings provide support for moving away from the a priori classification of job characteristics as either demands or resources. Moreover, demands should be further deliniated as challenges or hindrances. This suggests that overcoming or managing challenge demands may serve the same purpose as a resource, such as increasing motivation and engagement with their work. The overlap between the classification of resources suggests that there might be job characteristics that universally serve as resources to varying degrees depending on the type of work. 
-
-```{r img-with-knitr, echo=FALSE, fig.align='right', out.width='25%'}
-
-knitr::include_graphics("https://www.siop.org/portals/84/Images/Conference/Conference%202022/Logos/2022_SIOP_Seattle_Web.png?ver=EH1uNb9JIQvpJ8v6vBO5uA%3d%3d")
-
-```
 
 ```{r bib, eval=FALSE}
 knitr::write_bib(c('knitr','rmarkdown','posterdown','pagedown', 'labourR'), 'packages.bib')
