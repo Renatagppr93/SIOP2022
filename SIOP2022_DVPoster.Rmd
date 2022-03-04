@@ -35,8 +35,8 @@ logoright_name: '![](Quill_White.png){.new-img-right}'
 main_width: 0.3	
 csl: "apa7.csl"
 body_textsize: "48px"
-poster_height: "50in"
-poster_width: "70in"
+poster_height: "36in"
+poster_width: "48in"
 output: 
     posterdown::posterdown_betterland:
     self_contained: true
