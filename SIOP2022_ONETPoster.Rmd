@@ -18,11 +18,11 @@ secondary_colour: "#ad2831"
 accent_colour: "#38040e"
 author_textcol: "#FDFEFF"
 column_numbers: 3
-poster_height: "36in"
-poster_width: "48in"
+poster_height: "40in"
+poster_width: "45in"
 body_textsize: "50px"
-logoright_name: 'Quill_White.png'
-logoleft_name: https&#58;//www.montclair.edu/university-communications/wp-content/uploads/sites/144//2020/10/hawk-logo-color.svg
+logoleft_name: 'Quill_White.png'
+logoright_name: https&#58;//www.montclair.edu/university-communications/wp-content/uploads/sites/144//2020/10/hawk-logo-color.svg
 csl: "apa7.csl"
 output: 
   posterdown::posterdown_html:
@@ -52,10 +52,10 @@ knitr::opts_chunk$set(echo = FALSE)
 
 .logo_right {
   position: absolute;
-  top: 0px;
+  top: 20px;
   left: 3250px;
-  width: 1000px;          
-  height: 540px;
+  width: 700px;          
+  height: 440px;
 }
 
 p.caption {
